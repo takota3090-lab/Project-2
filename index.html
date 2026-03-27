@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أوتو بارتس برو - سوق قطع الغيار المتقدم</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .search-glow:focus {
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+        }
+        .vin-input {
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .part-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        }
+        .category-card {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .gear-spin {
+            animation: spin 20s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .tab-active {
+            border-bottom: 3px solid #6366f1;
+            color: #6366f1;
+        }
+        .loader {
+            border-top-color: #6366f1;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        /* RTL Specific adjustments */
+        .mr-2 { margin-left: 0.5rem; margin-right: 0; }
+        .mr-3 { margin-left: 0.75rem; margin-right: 0; }
+        .mr-4 { margin-left: 1rem; margin-right: 0; }
+        .ml-2 { margin-right: 0.5rem; margin-left: 0; }
+        .ml-4 { margin-right: 1rem; margin-left: 0; }
+        .space-x-2 > * + * { margin-right: 0.5rem; margin-left: 0; }
+        .space-x-3 > * + * { margin-right: 0.75rem; margin-left: 0; }
+        .space-x-4 > * + * { margin-right: 1rem; margin-left: 0; }
+        .space-x-6 > * + * { margin-right: 1.5rem; margin-left: 0; }
+        .space-x-8 > * + * { margin-right: 2rem; margin-left: 0; }
+        .fa-arrow-right { transform: scaleX(-1); }
+        .fa-arrow-left { transform: scaleX(-1); }
+    </style>
+<base target="_blank">
+</head>
+<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-lg transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-cog gear-spin text-white text-xl"></i>
+                    </div>
+                    <span class="font-orbitron text-2xl font-bold text-gray-900">Auto<span class="text-indigo-600">Parts</span> Pro</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#search-section" class="text-gray-700 hover:text-indigo-600 font-medium transition">البحث عن قطع الغيار</a>
+                    <a href="#catalog" class="text-gray-700 hover:text-indigo-600 font-medium transition">الكتالوج</a>
+                    <a href="#compatibility" class="text-gray-700 hover:text-indigo-600 font-medium transition">فحص VIN</a>
+                    <a href="#brands" class="text-gray-700 hover:text-indigo-600 font-medium transition">الماركات</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-gray-600 hover:text-indigo-600 transition" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-1 -left-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                    <button class="md:hidden p-2 text-gray-600" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                    <button class="hidden md:block px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-medium hover:shadow-lg hover:scale-105 transition">
+                        تسجيل الدخول
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 pt-2 pb-4 space-y-2">
+                <a href="#search-section" class="block py-2 text-gray-700">البحث عن قطع الغيار</a>
+                <a href="#catalog" class="block py-2 text-gray-700">الكتالوج</a>
+                <a href="#compatibility" class="block py-2 text-gray-700">فحص VIN</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-20 right-10 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl animate-float"></div>
+            <div class="absolute top-40 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-float" style="animation-delay: 2s"></div>
+            <div class="absolute -bottom-8 right-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-float" style="animation-delay: 4s"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white space-y-6 order-2 lg:order-1">
+                    <div class="inline-block px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-sm font-medium mb-4">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>أكثر من 2 مليون قطعة غيار في المخزون
+                    </div>
+                    <h1 class="font-bold text-5xl lg:text-7xl leading-tight">
+                        اعثر على <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">قطع الغيار المثالية</span> لسيارتك
+                    </h1>
+                    <p class="text-xl text-gray-300 leading-relaxed">
+                        ابحث برقم الهيكل VIN، أو حسب السيارة، أو رقم القطعة. احصل على تحقق فوري من التوافق وشحن سريع لجميع أنحاء العالم.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <button onclick="scrollToSection('search-section')" class="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition transform">
+                            ابدأ البحث <i class="fas fa-arrow-left mr-2"></i>
+                        </button>
+                        <button onclick="scrollToSection('how-it-works')" class="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 rounded-full font-bold text-lg hover:bg-white/20 transition">
+                            كيف يعمل
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-6 pt-6 text-sm text-gray-400">
+                        <span><i class="fas fa-shield-alt mr-2"></i>دفع آمن</span>
+                        <span><i class="fas fa-truck mr-2"></i>شحن مجاني فوق 99$</span>
+                        <span><i class="fas fa-undo mr-2"></i>إرجاع خلال 30 يوم</span>
+                    </div>
+                </div>
+                <div class="relative order-1 lg:order-2">
+                    <div class="relative z-10 animate-float">
+                        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80" alt="محرك السيارة" class="rounded-2xl shadow-2xl border border-white/10">
+                        <div class="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-xl">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-green-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-900">توافق مضمون</p>
+                                    <p class="text-sm text-gray-500">ضمان 100% للملاءمة</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section with Tabs -->
+    <section id="search-section" class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-bold text-4xl mb-4">ابحث بطريقتك</h2>
+                <p class="text-gray-600 text-lg">طرق بحث متعددة للعثور على ما تحتاجه بالضبط</p>
+            </div>
+
+            <!-- Search Tabs -->
+            <div class="bg-gray-100 rounded-2xl p-2 mb-8 flex flex-wrap justify-center gap-2">
+                <button onclick="switchTab('vin')" id="tab-vin" class="tab-btn px-6 py-3 rounded-xl font-medium transition-all duration-300 bg-white shadow-md text-indigo-600">
+                    <i class="fas fa-barcode mr-2"></i>البحث برقم VIN
+                </button>
+                <button onclick="switchTab('vehicle')" id="tab-vehicle" class="tab-btn px-6 py-3 rounded-xl font-medium transition-all duration-300 text-gray-600 hover:text-indigo-600">
+                    <i class="fas fa-car mr-2"></i>حسب السيارة
+                </button>
+                <button onclick="switchTab('part')" id="tab-part" class="tab-btn px-6 py-3 rounded-xl font-medium transition-all duration-300 text-gray-600 hover:text-indigo-600">
+                    <i class="fas fa-search mr-2"></i>رقم القطعة
+                </button>
+                <button onclick="switchTab('category')" id="tab-category" class="tab-btn px-6 py-3 rounded-xl font-medium transition-all duration-300 text-gray-600 hover:text-indigo-600">
+                    <i class="fas fa-th-large mr-2"></i>حسب الفئة
+                </button>
+            </div>
+
+            <!-- VIN Search Panel -->
+            <div id="panel-vin" class="search-panel bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-barcode text-3xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">أدخل رقم الهيكل VIN</h3>
+                    <p class="text-gray-600">اعثر على قطع غيار مضمونة لتناسب سيارتك بالضبط</p>
+                </div>
+                <div class="max-w-2xl mx-auto">
+                    <div class="relative">
+                        <input type="text" id="vin-input" placeholder="مثال: 1HGCM82633A123456" maxlength="17" 
+                               class="vin-input w-full px-6 py-5 text-xl border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:outline-none search-glow transition text-center font-mono tracking-widest"
+                               oninput="this.value = this.value.toUpperCase().replace(/[^A-HJ-NPR-Z0-9]/g, '')">
+                        <button onclick="searchByVIN()" id="vin-search-btn" class="absolute left-2 top-2 bottom-2 px-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-medium hover:shadow-lg transition">
+                            بحث
+                        </button>
+                    </div>
+                    <p class="text-center text-sm text-gray-500 mt-3">رقم VIN موجود عادةً على لوحة القيادة أو باب السائق</p>
+                </div>
+                
+                <!-- Loading State -->
+                <div id="vin-loading" class="hidden mt-6 text-center">
+                    <div class="inline-block w-12 h-12 border-4 border-gray-200 border-t-indigo-600 rounded-full loader"></div>
+                    <p class="mt-2 text-gray-600">جاري فك تشفير رقم VIN...</p>
+                </div>
+
+                <!-- Error State -->
+                <div id="vin-error" class="hidden mt-6 bg-red-50 border border-red-200 rounded-xl p-4 text-center">
+                    <i class="fas fa-exclamation-circle text-red-500 text-2xl mb-2"></i>
+                    <p class="text-red-700" id="vin-error-text">لم يتم العثور على بيانات لهذا الرقم</p>
+                </div>
+
+                <!-- VIN Result -->
+                <div id="vin-result" class="hidden mt-6">
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-check-circle text-green-600 text-3xl"></i>
+                                <div>
+                                    <p class="font-bold text-green-900 text-lg" id="vehicle-title">جاري التحميل...</p>
+                                    <p class="text-sm text-green-700" id="vehicle-vin">VIN: <span></span></p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 bg-green-500 text-white rounded-full text-sm font-medium">مؤكد</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 pt-4 border-t border-green-200">
+                            <div class="text-center">
+                                <p class="text-xs text-green-600 mb-1">السنة</p>
+                                <p class="font-bold text-green-900" id="res-year">-</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-green-600 mb-1">الشركة</p>
+                                <p class="font-bold text-green-900" id="res-make">-</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-green-600 mb-1">الموديل</p>
+                                <p class="font-bold text-green-900" id="res-model">-</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-green-600 mb-1">المحرك</p>
+                                <p class="font-bold text-green-900" id="res-engine">-</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 p-3 bg-white/50 rounded-lg">
+                            <p class="text-sm text-green-800 flex items-center">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                <span id="res-plant">مصنع التجميع: </span>
+                            </p>
+                        </div>
+
+                        <button onclick="showCompatibleParts()" class="w-full mt-4 py-3 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition">
+                            عرض قطع الغيار المتوافقة <i class="fas fa-arrow-left mr-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vehicle Search Panel -->
+            <div id="panel-vehicle" class="search-panel hidden bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">السنة</label>
+                        <select id="year-select" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" onchange="updateMakes()">
+                            <option value="">اختر السنة</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">الشركة</label>
+                        <select id="make-select" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" disabled onchange="updateModels()">
+                            <option value="">اختر الشركة</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">الموديل</label>
+                        <select id="model-select" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" disabled onchange="updateEngines()">
+                            <option value="">اختر الموديل</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">المحرك</label>
+                        <select id="engine-select" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" disabled>
+                            <option value="">اختر المحرك</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="searchByVehicle()" class="w-full mt-6 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold text-lg hover:shadow-xl transition transform hover:scale-[1.02]">
+                    البحث عن قطع الغيار لهذه السيارة
+                </button>
+            </div>
+
+            <!-- Part Number Search -->
+            <div id="panel-part" class="search-panel hidden bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
+                <div class="max-w-2xl mx-auto">
+                    <div class="relative">
+                        <input type="text" placeholder="أدخل رقم القطعة الأصلي أو التجاري" 
+                               class="w-full px-6 py-5 text-lg border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:outline-none search-glow transition">
+                        <button onclick="searchByPartNumber()" class="absolute left-2 top-2 bottom-2 px-8 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-medium hover:shadow-lg transition">
+                            بحث
+                        </button>
+                    </div>
+                    <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <i class="fas fa-cog text-2xl text-gray-400 mb-2"></i>
+                            <p class="text-sm font-medium">أرقام OEM</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <i class="fas fa-industry text-2xl text-gray-400 mb-2"></i>
+                            <p class="text-sm font-medium">قطع تجارية</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <i class="fas fa-barcode text-2xl text-gray-400 mb-2"></i>
+                            <p class="text-sm font-medium">رموز SKU</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <i class="fas fa-tags text-2xl text-gray-400 mb-2"></i>
+                            <p class="text-sm font-medium">بدائل</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Search -->
+            <div id="panel-category" class="search-panel hidden bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <button onclick="searchByCategory('brakes')" class="p-6 border-2 border-gray-200 rounded-xl hover:border-indigo-500 hover:bg-indigo-50 transition group text-center">
+                        <i class="fas fa-circle-notch text-4xl text-gray-400 group-hover:text-indigo-600 mb-3 transition"></i>
+                        <p class="font-medium">فرامل</p>
+                    </button>
+                    <button onclick="searchByCategory('engine')" class="p-6 border-2 border-gray-200 rounded-xl hover:border-indigo-500 hover:bg-indigo-50 transition group text-center">
+                        <i class="fas fa-cog text-4xl text-gray-400 group-hover:text-indigo-600 mb-3 transition"></i>
+                        <p class="font-medium">محرك</p>
+                    </button>
+                    <button onclick="searchByCategory('suspension')" class="p-6 border-2 border-gray-200 rounded-xl hover:border-indigo-500 hover:bg-indigo-50 transition group text-center">
+                        <i class="fas fa-compress-arrows-alt text-4xl text-gray-400 group-hover:text-indigo-600 mb-3 transition"></i>
+                        <p class="font-medium">معلق</p>
+                    </button>
+                    <button onclick="searchByCategory('electrical')" class="p-6 border-2 border-gray-200 rounded-xl hover:border-indigo-500 hover:bg-indigo-50 transition group text-center">
+                        <i class="fas fa-bolt text-4xl text-gray-400 group-hover:text-indigo-600 mb-3 transition"></i>
+                        <p class="font-medium">كهربائي</p>
+                    </button>
+                    <button onclick="searchByCategory('body')" class="p-6 border-2 border-gray-200 rounded-xl hover:border-indigo-500 hover:bg-indigo-50 transition group text-center">
+                        <i class="fas fa-car-crash text-4xl text-gray-400 group-hover:text-indigo-600 mb-3 transition"></i>
+                        <p class="font-medium">هيكل خارجي</p>
+                    </button>
+                    <button onclick="searchByCategory('transmission')" class="p-6 border-2 border-gray-200 rounded-xl hover:border-indigo-500 hover:bg-indigo-50 transition group text-center">
+                        <i class="fas fa-tachometer-alt text-4xl text-gray-400 group-hover:text-indigo-600 mb-3 transition"></i>
+                        <p class="font-medium">ناقل حركة</p>
+                    </button>
+                    <button onclick="searchByCategory('interior')" class="p-6 border-2 border-gray-200 rounded-xl hover:border-indigo-500 hover:bg-indigo-50 transition group text-center">
+                        <i class="fas fa-chair text-4xl text-gray-400 group-hover:text-indigo-600 mb-3 transition"></i>
+                        <p class="font-medium">داخلي</p>
+                    </button>
+                    <button onclick="searchByCategory('exhaust')" class="p-6 border-2 border-gray-200 rounded-xl hover:border-indigo-500 hover:bg-indigo-50 transition group text-center">
+                        <i class="fas fa-wind text-4xl text-gray-400 group-hover:text-indigo-600 mb-3 transition"></i>
+                        <p class="font-medium">عادم</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section id="catalog" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="font-bold text-4xl mb-2">الفئات الشائعة</h2>
+                    <p class="text-gray-600">تصفح أكثر قطع الغيار طلباً</p>
+                </div>
+                <a href="#" class="text-indigo-600 font-medium hover:text-indigo-800 flex items-center">
+                    عرض الكل <i class="fas fa-arrow-left mr-2"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Brake System -->
+                <div class="category-card rounded-2xl p-6 text-white card-hover cursor-pointer group" onclick="showCategoryParts('brakes')">
+                    <div class="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-white/20 transition">
+                        <i class="fas fa-circle-notch text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">نظام الفرامل</h3>
+                    <p class="text-gray-300 text-sm mb-4">فحمات، أقراص، كليبرز، خراطيم</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold">2,450+</span>
+                        <i class="fas fa-arrow-left opacity-0 group-hover:opacity-100 transition"></i>
+                    </div>
+                </div>
+
+                <!-- Engine Parts -->
+                <div class="category-card rounded-2xl p-6 text-white card-hover cursor-pointer group" onclick="showCategoryParts('engine')">
+                    <div class="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-white/20 transition">
+                        <i class="fas fa-cog text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">قطع المحرك</h3>
+                    <p class="text-gray-300 text-sm mb-4">مكابس، جوايط، تروس، فلاتر</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold">5,200+</span>
+                        <i class="fas fa-arrow-left opacity-0 group-hover:opacity-100 transition"></i>
+                    </div>
+                </div>
+
+                <!-- Suspension -->
+                <div class="category-card rounded-2xl p-6 text-white card-hover cursor-pointer group" onclick="showCategoryParts('suspension')">
+                    <div class="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-white/20 transition">
+                        <i class="fas fa-compress-arrows-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">المعلق</h3>
+                    <p class="text-gray-300 text-sm mb-4">مساعدات، مخمدات، ذراع تحكم</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold">1,800+</span>
+                        <i class="fas fa-arrow-left opacity-0 group-hover:opacity-100 transition"></i>
+                    </div>
+                </div>
+
+                <!-- Electrical -->
+                <div class="category-card rounded-2xl p-6 text-white card-hover cursor-pointer group" onclick="showCategoryParts('electrical')">
+                    <div class="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-white/20 transition">
+                        <i class="fas fa-bolt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">الكهرباء</h3>
+                    <p class="text-gray-300 text-sm mb-4">دينامو، سلف، حساسات</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold">3,100+</span>
+                        <i class="fas fa-arrow-left opacity-0 group-hover:opacity-100 transition"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parts Results Section (Dynamic) -->
+    <section id="parts-results" class="py-20 bg-white hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <div>
+                    <h2 id="results-title" class="font-bold text-3xl mb-2">نتائج البحث</h2>
+                    <p id="results-subtitle" class="text-gray-600">عرض قطع الغيار المتوافقة مع سيارتك</p>
+                </div>
+                <div class="flex gap-3">
+                    <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                        <option>الترتيب: الأكثر صلة</option>
+                        <option>السعر: من الأقل للأعلى</option>
+                        <option>السعر: من الأعلى للأقل</option>
+                        <option>الأعلى تقييماً</option>
+                    </select>
+                    <button onclick="toggleFilters()" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                        <i class="fas fa-filter mr-2"></i>فلترة
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filters Panel -->
+            <div id="filters-panel" class="hidden mb-8 bg-gray-50 rounded-xl p-6">
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">نطاق السعر</label>
+                        <input type="range" class="w-full" min="0" max="1000" value="500">
+                        <div class="flex justify-between text-sm text-gray-600 mt-1">
+                            <span>$0</span>
+                            <span>$1000+</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">الماركة</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center"><input type="checkbox" class="ml-2 rounded text-indigo-600"> OEM</label>
+                            <label class="flex items-center"><input type="checkbox" class="ml-2 rounded text-indigo-600"> Bosch</label>
+                            <label class="flex items-center"><input type="checkbox" class="ml-2 rounded text-indigo-600"> Denso</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">الحالة</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center"><input type="checkbox" class="ml-2 rounded text-indigo-600"> جديد</label>
+                            <label class="flex items-center"><input type="checkbox" class="ml-2 rounded text-indigo-600"> مجدد</label>
+                            <label class="flex items-center"><input type="checkbox" class="ml-2 rounded text-indigo-600"> مستعمل</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">الضمان</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center"><input type="checkbox" class="ml-2 rounded text-indigo-600"> مدى الحياة</label>
+                            <label class="flex items-center"><input type="checkbox" class="ml-2 rounded text-indigo-600"> سنة</label>
+                            <label class="flex items-center"><input type="checkbox" class="ml-2 rounded text-indigo-600"> 90 يوم</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parts Grid -->
+            <div id="parts-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Parts will be dynamically inserted here -->
+            </div>
+
+            <div class="mt-12 text-center">
+                <button class="px-8 py-3 border-2 border-indigo-600 text-indigo-600 rounded-full font-medium hover:bg-indigo-600 hover:text-white transition">
+                    تحميل المزيد
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIN Decoder Feature -->
+    <section id="compatibility" class="py-20 bg-gradient-to-br from-indigo-900 to-purple-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="inline-block px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-sm font-medium mb-6">
+                        <i class="fas fa-shield-alt mr-2"></i>ضمان 100% للملاءمة
+                    </div>
+                    <h2 class="font-bold text-4xl mb-6">فك تشفير VIN والتحقق من التوافق</h2>
+                    <p class="text-xl text-indigo-200 mb-8 leading-relaxed">
+                        نظام فك تشفير VIN المتقدم يضمن أن كل قطعة تطلبها تتطابق تماماً مع مواصفات سيارتك. لا مزيد من الإرجاع، لا مزيد من الصداع.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-sm"></i>
+                            </div>
+                            <span>البحث الفوري عن مواصفات المركبة</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-sm"></i>
+                            </div>
+                            <span>التحقق الدقيق من الفئة والخيارات</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-sm"></i>
+                            </div>
+                            <span>تنبيهات الاستدعاء والنشرات الخدمية</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-sm"></i>
+                            </div>
+                            <span>اقتراحات قطع الغيار البديلة</span>
+                        </li>
+                    </ul>
+                    <button onclick="scrollToSection('search-section')" class="px-8 py-4 bg-white text-indigo-900 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition transform">
+                        جرب البحث برقم VIN الآن
+                    </button>
+                </div>
+                <div class="relative order-1 lg:order-2">
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold">تقرير VIN نموذجي</h3>
+                            <span class="px-3 py-1 bg-green-500 rounded-full text-xs font-medium">تم التحقق</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between py-3 border-b border-white/10">
+                                <span class="text-indigo-200">السيارة</span>
+                                <span class="font-medium">2020 Toyota Camry SE</span>
+                            </div>
+                            <div class="flex justify-between py-3 border-b border-white/10">
+                                <span class="text-indigo-200">المحرك</span>
+                                <span class="font-medium">2.5L L4 DOHC 16V</span>
+                            </div>
+                            <div class="flex justify-between py-3 border-b border-white/10">
+                                <span class="text-indigo-200">ناقل الحركة</span>
+                                <span class="font-medium">أوتوماتيك 8 سرعات</span>
+                            </div>
+                            <div class="flex justify-between py-3 border-b border-white/10">
+                                <span class="text-indigo-200">مصنع التجميع</span>
+                                <span class="font-medium">جورجتاون، كنتاكي</span>
+                            </div>
+                            <div class="flex justify-between py-3">
+                                <span class="text-indigo-200">تاريخ الإنتاج</span>
+                                <span class="font-medium">مارس 2020</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-green-500/20 rounded-lg border border-green-500/30">
+                            <p class="text-sm text-green-300 flex items-center">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                247 قطعة غيار متوفرة لهذه المواصفات بالضبط
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Brands -->
+    <section id="brands" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-bold text-4xl mb-4">الماركات الموثوقة</h2>
+                <p class="text-gray-600 text-lg">نتعاون مع كبرى مصنعي قطع الغيار في العالم</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center opacity-70">
+                <div class="flex items-center justify-center h-20 grayscale hover:grayscale-0 transition cursor-pointer">
+                    <div class="text-2xl font-black text-gray-800">BOSCH</div>
+                </div>
+                <div class="flex items-center justify-center h-20 grayscale hover:grayscale-0 transition cursor-pointer">
+                    <div class="text-2xl font-black text-gray-800">DENSO</div>
+                </div>
+                <div class="flex items-center justify-center h-20 grayscale hover:grayscale-0 transition cursor-pointer">
+                    <div class="text-2xl font-black text-gray-800">MAGNA</div>
+                </div>
+                <div class="flex items-center justify-center h-20 grayscale hover:grayscale-0 transition cursor-pointer">
+                    <div class="text-2xl font-black text-gray-800">CONTINENTAL</div>
+                </div>
+                <div class="flex items-center justify-center h-20 grayscale hover:grayscale-0 transition cursor-pointer">
+                    <div class="text-2xl font-black text-gray-800">VALEO</div>
+                </div>
+                <div class="flex items-center justify-center h-20 grayscale hover:grayscale-0 transition cursor-pointer">
+                    <div class="text-2xl font-black text-gray-800">Aisin</div>
+                </div>
+            </div>
+
+            <div class="mt-16 grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-certificate text-3xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">OEM أصلي</h3>
+                    <p class="text-gray-600">قطع غيار الشركة المصنعة الأصلية مع تغطية ضمان كاملة</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-medal text-3xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">تجاري ممتاز</h3>
+                    <p class="text-gray-600">بدائل عالية الجودة تلبي أو تتجاوز مواصفات OEM</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-recycle text-3xl text-pink-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">مجدد</h3>
+                    <p class="text-gray-600">قطع صديقة للبيئة مجددة وتم اختبارها كالجديدة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-bold text-4xl mb-4">كيف يعمل</h2>
+                <p class="text-gray-600 text-lg">احصل على القطعة المناسبة في ثلاث خطوات بسيطة</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 relative">
+                <div class="hidden md:block absolute top-1/2 right-1/3 left-1/3 h-0.5 bg-indigo-200 -translate-y-1/2 z-0"></div>
+                
+                <div class="relative z-10 text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-3xl font-bold shadow-xl">
+                        ١
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">ابحث عن سيارتك</h3>
+                    <p class="text-gray-600">أدخل رقم VIN أو اختر الشركة والموديل والسنة لرؤية المطابقات الدقيقة</p>
+                </div>
+
+                <div class="relative z-10 text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-3xl font-bold shadow-xl">
+                        ٢
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">اعثر على قطعتك</h3>
+                    <p class="text-gray-600">تصفح قطع الغيار المتوافقة مع المواصفات التفصيلية والصور وتقييمات العملاء</p>
+                </div>
+
+                <div class="relative z-10 text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-3xl font-bold shadow-xl">
+                        ٣
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">توصيل سريع</h3>
+                    <p class="text-gray-600">اطلب بثقة واحصل على قطع الغيار delivered لباب منزلك أو لورشة التصليح</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-bold text-4xl text-center mb-12">ماذا يقول الميكانيكيون</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6">"البحث برقم VIN وفّر عليّ الكثير من الوقت. كنت أقوم بمطابقة القطع يدوياً، الآن أحصل على المطابقات الدقيقة فوراً. ثورة في ورشتي."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full ml-4"></div>
+                        <div>
+                            <p class="font-bold">مايك رودريغيز</p>
+                            <p class="text-sm text-gray-500">صاحب ورشة رودريغيز للسيارات</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6">"أسعار تنافسية وضمان التوافق يعني عدم وجود إرجاع. عملائي أكثر سعادة وهوامشي أفضل."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full ml-4"></div>
+                        <div>
+                            <p class="font-bold">سارة تشن</p>
+                            <p class="text-sm text-gray-500">ميكانيكي رئيسي، بريسيجن موتورز</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6">"أطلب جميع قطع السيارات الكلاسيكية النادرة من هنا. الكتالوج ضخم والشحن دائماً سريع. أنصح به بشدة."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full ml-4"></div>
+                        <div>
+                            <p class="font-bold">جيمس ويلسون</p>
+                            <p class="text-sm text-gray-500">ترميم السيارات الكلاسيكية</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-20 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-bold text-3xl mb-4">احصل على عروض حصرية</h2>
+            <p class="text-indigo-100 mb-8 text-lg">اشترك للحصول على خصم 15% على طلبك الأول وتنبيهات للقطع النادرة</p>
+            <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto" onsubmit="event.preventDefault(); alert('شكراً للاشتراك!');">
+                <input type="email" placeholder="أدخل بريدك الإلكتروني" class="flex-1 px-6 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-4 focus:ring-white/30 text-right">
+                <button type="submit" class="px-8 py-4 bg-gray-900 rounded-full font-bold hover:bg-gray-800 transition">
+                    اشتراك
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-cog text-white text-xl"></i>
+                        </div>
+                        <span class="font-orbitron text-2xl font-bold text-white">Auto<span class="text-indigo-400">Parts</span> Pro</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">أكثر متاجر قطع الغيار تطوراً مع فحص التوافق بناءً على رقم VIN.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-indigo-600 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-indigo-600 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-indigo-600 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-indigo-600 transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">التسوق</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white transition">قطع الفرامل</a></li>
+                        <li><a href="#" class="hover:text-white transition">مكونات المحرك</a></li>
+                        <li><a href="#" class="hover:text-white transition">المعلق</a></li>
+                        <li><a href="#" class="hover:text-white transition">الكهرباء</a></li>
+                        <li><a href="#" class="hover:text-white transition">الهيكل الخارجي</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">الدعم</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white transition">حالة الطلب</a></li>
+                        <li><a href="#" class="hover:text-white transition">الإرجاع والضمان</a></li>
+                        <li><a href="#" class="hover:text-white transition">مساعدة VIN</a></li>
+                        <li><a href="#" class="hover:text-white transition">أدلة التركيب</a></li>
+                        <li><a href="#" class="hover:text-white transition">اتصل بنا</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">التواصل</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-indigo-400"></i>
+                            <span>1-800-AUTOPARTS</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-indigo-400"></i>
+                            <span>help@autopartspro.com</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-clock text-indigo-400"></i>
+                            <span>دعم 24/7</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm text-gray-500">&copy; 2026 أوتو بارتس برو. جميع الحقوق محفوظة.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0 text-sm">
+                    <a href="#" class="hover:text-white transition">سياسة الخصوصية</a>
+                    <a href="#" class="hover:text-white transition">شروط الخدمة</a>
+                    <a href="#" class="hover:text-white transition">إمكانية الوصول</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed inset-y-0 left-0 w-full md:w-96 bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 z-50 flex flex-col">
+        <div class="p-6 border-b flex justify-between items-center bg-gray-50">
+            <h3 class="text-xl font-bold flex items-center">
+                <i class="fas fa-shopping-cart ml-3 text-indigo-600"></i>سلة التسوق
+            </h3>
+            <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6">
+            <div class="text-center text-gray-500 py-12">
+                <i class="fas fa-shopping-basket text-6xl mb-4 text-gray-300"></i>
+                <p>سلة التسوق فارغة</p>
+                <button onclick="toggleCart(); scrollToSection('search-section')" class="mt-4 text-indigo-600 font-medium hover:underline">
+                    ابدأ التسوق
+                </button>
+            </div>
+        </div>
+        <div class="p-6 border-t bg-gray-50">
+            <div class="flex justify-between mb-4 text-lg font-bold">
+                <span>الإجمالي</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button class="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold hover:shadow-lg transition">
+                إتمام الشراء
+            </button>
+        </div>
+    </div>
+    <div id="cart-overlay" class="fixed inset-0 bg-black/50 hidden z-40" onclick="toggleCart()"></div>
+
+    <script>
+        // Data
+        const vehicleData = {
+            years: Array.from({length: 25}, (_, i) => 2026 - i),
+            makes: {
+                'Toyota': ['Camry', 'Corolla', 'RAV4', 'Highlander', 'Tacoma', 'Tundra', '4Runner'],
+                'Honda': ['Accord', 'Civic', 'CR-V', 'Pilot', 'Odyssey', 'Ridgeline'],
+                'Ford': ['F-150', 'Mustang', 'Explorer', 'Escape', 'Bronco', 'Ranger'],
+                'Chevrolet': ['Silverado', 'Equinox', 'Malibu', 'Tahoe', 'Suburban', 'Camaro'],
+                'BMW': ['3 Series', '5 Series', 'X3', 'X5', '7 Series', 'M3'],
+                'Mercedes': ['C-Class', 'E-Class', 'S-Class', 'GLC', 'GLE', 'A-Class']
+            },
+            engines: {
+                'Camry': ['2.5L L4', '3.5L V6', '2.5L Hybrid'],
+                'Accord': ['1.5L Turbo', '2.0L Turbo', '2.0L Hybrid'],
+                'F-150': ['3.3L V6', '2.7L EcoBoost', '5.0L V8', '3.5L PowerBoost']
+            }
+        };
+
+        const partsData = [
+            { id: 1, name: 'طقم فحمات فرامل سيراميك', sku: 'BP-CER-001', price: 89.99, category: 'brakes', rating: 4.8, reviews: 234, image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80', brand: 'Brembo', fitment: '2019-2023 Honda Accord', warranty: '3 سنوات' },
+            { id: 2, name: 'أقراص فرامل أداء (زوج)', sku: 'RT-PRF-002', price: 156.00, category: 'brakes', rating: 4.9, reviews: 189, image: 'https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=400&q=80', brand: 'Bosch', fitment: 'عالمي', warranty: 'مدى الحياة' },
+            { id: 3, name: 'طقم مساعد كامل', sku: 'STR-ASM-003', price: 199.99, category: 'suspension', rating: 4.7, reviews: 156, image: 'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=400&q=80', brand: 'Monroe', fitment: '2020 Toyota Camry', warranty: '5 سنوات' },
+            { id: 4, name: 'طقم ملفات إشعال (4 قطع)', sku: 'IGN-CLP-004', price: 124.50, category: 'electrical', rating: 4.6, reviews: 312, image: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400&q=80', brand: 'Denso', fitment: '2018-2022 Honda Civic', warranty: 'سنتان' },
+            { id: 5, name: 'حساس أكسجين أصلي', sku: 'OXY-SNS-005', price: 67.99, category: 'electrical', rating: 4.5, reviews: 89, image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&q=80', brand: 'NGK', fitment: 'توافقات متعددة', warranty: 'سنة' },
+            { id: 6, name: 'طقم سير توقيت مع طرمبة ماء', sku: 'TMB-KIT-006', price: 289.00, category: 'engine', rating: 4.9, reviews: 67, image: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400&q=80', brand: 'Gates', fitment: '2015-2020 Toyota RAV4', warranty: 'مدى الحياة' }
+        ];
+
+        let cart = [];
+        let currentVehicle = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initYearSelect();
+            renderParts(partsData);
+        });
+
+        // Tab Switching
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'shadow-md', 'text-indigo-600');
+                btn.classList.add('text-gray-600');
+            });
+            document.getElementById(`tab-${tab}`).classList.remove('text-gray-600');
+            document.getElementById(`tab-${tab}`).classList.add('bg-white', 'shadow-md', 'text-indigo-600');
+            
+            document.querySelectorAll('.search-panel').forEach(panel => panel.classList.add('hidden'));
+            document.getElementById(`panel-${tab}`).classList.remove('hidden');
+        }
+
+        // REAL VIN API Integration using NHTSA (Free, No API Key Required)
+        async function searchByVIN() {
+            const vinInput = document.getElementById('vin-input');
+            const vin = vinInput.value.trim().toUpperCase();
+            
+            if (vin.length !== 17) {
+                showVINError('يرجى إدخال رقم VIN صحيح مكون من 17 حرفاً');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('vin-loading').classList.remove('hidden');
+            document.getElementById('vin-result').classList.add('hidden');
+            document.getElementById('vin-error').classList.add('hidden');
+            document.getElementById('vin-search-btn').disabled = true;
+            document.getElementById('vin-search-btn').innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+            try {
+                // Using NHTSA API (National Highway Traffic Safety Administration) - Free, official US government API
+                const response = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`);
+                const data = await response.json();
+
+                if (data.Results && data.Results.length > 0) {
+                    const results = data.Results;
+                    
+                    // Extract vehicle data from API response
+                    const getValue = (variable) => {
+                        const item = results.find(r => r.Variable === variable);
+                        return item && item.Value ? item.Value : 'غير متوفر';
+                    };
+
+                    const year = getValue('Model Year');
+                    const make = getValue('Make');
+                    const model = getValue('Model');
+                    const engineCylinders = getValue('Engine Number of Cylinders');
+                    const engineL = getValue('Displacement (L)');
+                    const plant = getValue('Plant City');
+                    const fuelType = getValue('Fuel Type - Primary');
+                    const transmission = getValue('Transmission Style');
+
+                    // Check if we got valid data
+                    if (make === 'غير متوفر' || model === 'غير متوفر') {
+                        showVINError('لم يتم العثور على بيانات لهذا الرقم. تأكد من صحة رقم VIN.');
+                        return;
+                    }
+
+                    // Display results
+                    document.getElementById('vehicle-title').textContent = `${year} ${make} ${model}`;
+                    document.getElementById('vehicle-vin').querySelector('span').textContent = vin;
+                    document.getElementById('res-year').textContent = year;
+                    document.getElementById('res-make').textContent = make;
+                    document.getElementById('res-model').textContent = model;
+                    document.getElementById('res-engine').textContent = engineL !== 'غير متوفر' ? `${engineL}L` : `${engineCylinders} سلندر`;
+                    document.getElementById('res-plant').textContent = `مصنع التجميع: ${plant} | ${fuelType}`;
+
+                    currentVehicle = { year, make, model, vin, engine: engineL };
+                    
+                    document.getElementById('vin-result').classList.remove('hidden');
+                } else {
+                    showVINError('لم يتم العثور على بيانات لهذا الرقم في قاعدة البيانات');
+                }
+            } catch (error) {
+                console.error('VIN API Error:', error);
+                showVINError('حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.');
+            } finally {
+                document.getElementById('vin-loading').classList.add('hidden');
+                document.getElementById('vin-search-btn').disabled = false;
+                document.getElementById('vin-search-btn').textContent = 'بحث';
+            }
+        }
+
+        function showVINError(message) {
+            document.getElementById('vin-error-text').textContent = message;
+            document.getElementById('vin-error').classList.remove('hidden');
+            document.getElementById('vin-loading').classList.add('hidden');
+            document.getElementById('vin-result').classList.add('hidden');
+        }
+
+        function showCompatibleParts() {
+            document.getElementById('parts-results').classList.remove('hidden');
+            const title = currentVehicle ? 
+                `قطع الغيار لـ ${currentVehicle.year} ${currentVehicle.make} ${currentVehicle.model}` : 
+                'قطع الغيار المتوافقة';
+            document.getElementById('results-title').textContent = title;
+            document.getElementById('results-subtitle').textContent = `عرض ${partsData.length} قطعة غيار متوافقة بناءً على رقم VIN`;
+            scrollToSection('parts-results');
+        }
+
+        // Vehicle Select Logic
+        function initYearSelect() {
+            const select = document.getElementById('year-select');
+            vehicleData.years.forEach(year => {
+                select.innerHTML += `<option value="${year}">${year}</option>`;
+            });
+        }
+
+        function updateMakes() {
+            const year = document.getElementById('year-select').value;
+            const makeSelect = document.getElementById('make-select');
+            makeSelect.innerHTML = '<option value="">اختر الشركة</option>';
+            makeSelect.disabled = !year;
+            
+            if (year) {
+                Object.keys(vehicleData.makes).forEach(make => {
+                    makeSelect.innerHTML += `<option value="${make}">${make}</option>`;
+                });
+            }
+            updateModels();
+        }
+
+        function updateModels() {
+            const make = document.getElementById('make-select').value;
+            const modelSelect = document.getElementById('model-select');
+            modelSelect.innerHTML = '<option value="">اختر الموديل</option>';
+            modelSelect.disabled = !make;
+            
+            if (make && vehicleData.makes[make]) {
+                vehicleData.makes[make].forEach(model => {
+                    modelSelect.innerHTML += `<option value="${model}">${model}</option>`;
+                });
+            }
+            updateEngines();
+        }
+
+        function updateEngines() {
+            const model = document.getElementById('model-select').value;
+            const engineSelect = document.getElementById('engine-select');
+            engineSelect.innerHTML = '<option value="">اختر المحرك</option>';
+            engineSelect.disabled = !model;
+            
+            if (model && vehicleData.engines[model]) {
+                vehicleData.engines[model].forEach(engine => {
+                    engineSelect.innerHTML += `<option value="${engine}">${engine}</option>`;
+                });
+            }
+        }
+
+        function searchByVehicle() {
+            const year = document.getElementById('year-select').value;
+            const make = document.getElementById('make-select').value;
+            const model = document.getElementById('model-select').value;
+            
+            if (!year || !make || !model) {
+                alert('يرجى اختيار السنة والشركة والموديل');
+                return;
+            }
+            
+            currentVehicle = { year, make, model };
+            document.getElementById('parts-results').classList.remove('hidden');
+            document.getElementById('results-title').textContent = `قطع الغيار لـ ${year} ${make} ${model}`;
+            document.getElementById('results-subtitle').textContent = `عرض ${partsData.length} قطعة غيار متوافقة`;
+            scrollToSection('parts-results');
+        }
+
+        function searchByPartNumber() {
+            document.getElementById('parts-results').classList.remove('hidden');
+            document.getElementById('results-title').textContent = 'نتائج البحث';
+            document.getElementById('results-subtitle').textContent = `تم العثور على ${partsData.length} قطعة تطابق بحثك`;
+            scrollToSection('parts-results');
+        }
+
+        function searchByCategory(category) {
+            const filtered = partsData.filter(p => p.category === category);
+            document.getElementById('parts-results').classList.remove('hidden');
+            const categoryNames = {
+                'brakes': 'فرامل',
+                'engine': 'محرك',
+                'suspension': 'معلق',
+                'electrical': 'كهرباء',
+                'body': 'هيكل خارجي',
+                'transmission': 'ناقل حركة',
+                'interior': 'داخلي',
+                'exhaust': 'عادم'
+            };
+            document.getElementById('results-title').textContent = `قطع ${categoryNames[category]}`;
+            document.getElementById('results-subtitle').textContent = `عرض ${filtered.length} قطعة في هذه الفئة`;
+            renderParts(filtered);
+            scrollToSection('parts-results');
+        }
+
+        function showCategoryParts(category) {
+            searchByCategory(category);
+        }
+
+        // Render Parts
+        function renderParts(parts) {
+            const grid = document.getElementById('parts-grid');
+            grid.innerHTML = parts.map(part => `
+                <div class="part-card rounded-2xl overflow-hidden shadow-lg card-hover border border-gray-100">
+                    <div class="relative h-48 overflow-hidden bg-gray-200">
+                        <img src="${part.image}" alt="${part.name}" class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold">
+                            ${part.brand}
+                        </div>
+                        ${part.warranty.includes('الحياة') ? '<div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">ضمان مدى الحياة</div>' : ''}
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400 text-sm">
+                                ${Array(5).fill(0).map((_, i) => `<i class="${i < Math.floor(part.rating) ? 'fas' : 'far'} fa-star"></i>`).join('')}
+                            </div>
+                            <span class="text-sm text-gray-500 mr-2">(${part.reviews})</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2 line-clamp-2">${part.name}</h3>
+                        <p class="text-sm text-gray-500 mb-4">رمز: ${part.sku}</p>
+                        <p class="text-xs text-green-600 mb-4 flex items-center">
+                            <i class="fas fa-check-circle ml-1"></i> يتناسب مع: ${part.fitment}
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-bold text-indigo-600">$${part.price}</span>
+                                <span class="text-sm text-gray-400 line-through mr-2">$${(part.price * 1.3).toFixed(2)}</span>
+                            </div>
+                            <button onclick="addToCart(${part.id})" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition flex items-center">
+                                <i class="fas fa-plus ml-2"></i>إضافة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Cart Functions
+        function addToCart(partId) {
+            const part = partsData.find(p => p.id === partId);
+            const existing = cart.find(item => item.id === partId);
+            
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ ...part, quantity: 1 });
+            }
+            
+            updateCart();
+            toggleCart();
+        }
+
+        function removeFromCart(partId) {
+            cart = cart.filter(item => item.id !== partId);
+            updateCart();
+        }
+
+        function updateQuantity(partId, delta) {
+            const item = cart.find(item => item.id === partId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) removeFromCart(partId);
+                else updateCart();
+            }
+        }
+
+        function updateCart() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+            
+            const cartItems = document.getElementById('cart-items');
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('cart-total').textContent = '$' + total.toFixed(2);
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="text-center text-gray-500 py-12">
+                        <i class="fas fa-shopping-basket text-6xl mb-4 text-gray-300"></i>
+                        <p>سلة التسوق فارغة</p>
+                        <button onclick="toggleCart(); scrollToSection('search-section')" class="mt-4 text-indigo-600 font-medium hover:underline">
+                            ابدأ التسوق
+                        </button>
+                    </div>
+                `;
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="flex items-center space-x-4 mb-4 pb-4 border-b">
+                        <img src="${item.image}" class="w-20 h-20 object-cover rounded-lg">
+                        <div class="flex-1 mr-4">
+                            <h4 class="font-bold text-sm line-clamp-2">${item.name}</h4>
+                            <p class="text-indigo-600 font-bold">$${item.price}</p>
+                            <div class="flex items-center mt-2 space-x-2">
+                                <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center">-</button>
+                                <span class="font-medium">${item.quantity}</span>
+                                <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700 mr-2">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const overlay = document.getElementById('cart-overlay');
+            const isOpen = !sidebar.classList.contains('-translate-x-full');
+            
+            if (isOpen) {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            } else {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            }
+        }
+
+        // Utilities
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function toggleFilters() {
+            document.getElementById('filters-panel').classList.toggle('hidden');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-xl');
+            } else {
+                nav.classList.remove('shadow-xl');
+            }
+        });
+    </script>
+</body>
+</html>
