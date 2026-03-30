@@ -337,6 +337,7 @@
 
         .brand-icon {
             font-size: 18px;
+            font-weight: bold;
         }
 
         /* Search Forms */
@@ -1239,7 +1240,7 @@
                     </div>
                     <div class="category-item" onclick="selectCategory(this, 'suspension')">
                         <div class="category-icon">🛞</div>
-                        <div class="category-name">الكفرات</div>
+                        <div class="category-name">المعلقة</div>
                     </div>
                     <div class="category-item" onclick="selectCategory(this, 'electrical')">
                         <div class="category-icon">⚡</div>
@@ -1374,15 +1375,34 @@
                 <div class="nav-icon">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.077 4.928C17.191 3.041 14.683 2 12.006 2 6.798 2 2.55 6.247 2.543 11.455c-.002 1.676.436 3.311 1.266 4.748L2 22l5.932-1.56c1.387.757 2.949 1.156 4.537 1.156h.004c5.205 0 9.454-4.249 9.462-9.458.004-2.526-.979-4.9-2.758-6.68zm-7.07 14.56h-.003c-1.414 0-2.802-.38-4.01-1.096l-.288-.171-3.52.925.94-3.433-.188-.298c-.788-1.25-1.204-2.693-1.202-4.168.007-4.178 3.4-7.57 7.581-7.57 2.022.007 3.922.79 5.352 2.22 1.43 1.43 2.217 3.335 2.21 5.358-.008 4.18-3.402 7.573-7.582 7.573zm4.156-5.674c-.228-.114-1.35-.666-1.56-.742-.21-.076-.362-.114-.515.114-.152.228-.59.742-.724.894-.133.152-.266.171-.494.057-.228-.114-.963-.355-1.835-1.133-.679-.604-1.137-1.35-1.27-1.578-.133-.228-.015-.352.1-.465.104-.103.228-.267.342-.401.114-.133.152-.228.228-.38.076-.152.038-.285-.019-.399-.057-.114-.514-1.24-.705-1.698-.185-.444-.374-.384-.514-.39-.133-.006-.285-.006-.438-.006-.152 0-.398.057-.607.285-.209.228-.798.78-.798 1.902 0 1.122.817 2.207.932 2.36.114.152 1.608 2.455 3.895 3.444.544.235.97.376 1.302.482.547.175 1.045.15 1.438.091.439-.066 1.35-.552 1.54-1.085.19-.533.19-.99.133-1.085-.057-.095-.209-.152-.438-.266z"/></svg>
                 </div>
-                <span class="nav-label">تواصل معنا</span>
+                <span class="nav-label">واتساب</span>
             </div>
         </nav>
     </div>
 
     <script>
-        // Brand icons mapping
+        // Brand icons mapping with company logos (text-based emoji representations)
         const brandIcons = {
-            'Lexus': '🇯🇵', 'Toyota': '🇯🇵', 'Kia': '🇰🇷', 'Hyundai': '🇰🇷', 'Nissan': '🇯🇵', 'Mazda': '🇯🇵', 'Chery': '🇨🇳', 'Geely': '🇨🇳', 'GAC': '🇨🇳', 'MG': '🇬🇧', 'Changan': '🇨🇳', 'Ford': '🇺🇸', 'Chevrolet': '🇺🇸', 'GMC': '🇺🇸', 'Mercury': '🇺🇸', 'GM': '🇺🇸', 'Isuzu': '🇯🇵', 'Honda': '🇯🇵', 'Mitsubishi': '🇯🇵', 'Volvo': '🇸🇪'
+            'Lexus': 'L',
+            'Toyota': 'T',
+            'Kia': 'K',
+            'Hyundai': 'H',
+            'Nissan': 'N',
+            'Mazda': 'M',
+            'Chery': 'C',
+            'Geely': 'G',
+            'GAC': 'G',
+            'MG': 'MG',
+            'Changan': 'C',
+            'Ford': 'F',
+            'Chevrolet': 'C',
+            'GMC': 'GMC',
+            'Mercury': 'M',
+            'GM': 'GM',
+            'Isuzu': 'I',
+            'Honda': 'H',
+            'Mitsubishi': 'M',
+            'Volvo': 'V'
         };
         const brandList = ['Lexus', 'Toyota', 'Kia', 'Hyundai', 'Nissan', 'Mazda', 'Chery', 'Geely', 'GAC', 'MG', 'Changan', 'Ford', 'Chevrolet', 'GMC', 'Mercury', 'GM', 'Isuzu', 'Honda', 'Mitsubishi', 'Volvo'];
         
