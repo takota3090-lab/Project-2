@@ -16,27 +16,27 @@
             --primary: #D4AF37;
             --primary-light: #F4D03F;
             --primary-dark: #B8860B;
-            --bg-dark: #0A0A0F;
-            --bg-card: #12121A;
-            --bg-input: #1A1A24;
-            --text-primary: #FFFFFF;
-            --text-secondary: #A0A0B0;
-            --accent: #FFD700;
-            --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F4D03F 50%, #D4AF37 100%);
-            --gradient-dark: linear-gradient(180deg, #12121A 0%, #0A0A0F 100%);
-            --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.3);
-            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Light theme variables */
-        body.light-theme {
             --bg-dark: #F8F9FA;
             --bg-card: #FFFFFF;
             --bg-input: #F0F2F5;
             --text-primary: #1A1A2E;
             --text-secondary: #6C757D;
+            --accent: #FFD700;
+            --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F4D03F 50%, #D4AF37 100%);
             --gradient-dark: linear-gradient(180deg, #FFFFFF 0%, #F8F9FA 100%);
+            --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.3);
             --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Dark theme as secondary */
+        body.dark-theme {
+            --bg-dark: #0A0A0F;
+            --bg-card: #12121A;
+            --bg-input: #1A1A24;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0B0;
+            --gradient-dark: linear-gradient(180deg, #12121A 0%, #0A0A0F 100%);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
         body {
@@ -80,17 +80,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(18, 18, 26, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 50;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        body.light-theme .header {
-            background: rgba(255, 255, 255, 0.9);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        body.dark-theme .header {
+            background: rgba(18, 18, 26, 0.8);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         .logo-section {
@@ -195,15 +195,11 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(to bottom, rgba(10,10,15,0.3), rgba(10,10,15,0.9));
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             padding: 24px;
-        }
-
-        body.light-theme .hero-overlay {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
         }
 
         .hero-title {
@@ -211,6 +207,7 @@
             font-weight: 800;
             margin-bottom: 8px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            color: #FFFFFF;
         }
 
         .hero-subtitle {
@@ -302,6 +299,44 @@
         .search-desc {
             font-size: 11px;
             color: var(--text-secondary);
+        }
+
+        /* Brands Section */
+        .brands-section {
+            padding: 0 20px;
+            margin-bottom: 24px;
+        }
+
+        .brands-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        .brand-item {
+            background: var(--bg-card);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 40px;
+            padding: 8px 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--shadow-card);
+        }
+
+        .brand-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .brand-icon {
+            font-size: 18px;
         }
 
         /* Search Forms */
@@ -900,7 +935,7 @@
             transform: translateX(-50%);
             width: 100%;
             max-width: 480px;
-            background: rgba(18, 18, 26, 0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-top: 1px solid rgba(212, 175, 55, 0.1);
             padding: 12px 24px 24px;
@@ -909,8 +944,8 @@
             z-index: 100;
         }
 
-        body.light-theme .bottom-nav {
-            background: rgba(255, 255, 255, 0.95);
+        body.dark-theme .bottom-nav {
+            background: rgba(18, 18, 26, 0.95);
         }
 
         .nav-item {
@@ -1022,7 +1057,7 @@
                         <div class="search-icon">
                             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                         </div>
-                        <h4 class="search-title">البحث برقم الشاسيه</h4>
+                        <h4 class="search-title">البحث برقم الهيكل</h4>
                         <p class="search-desc">VIN Decoder</p>
                     </div>
 
@@ -1051,6 +1086,11 @@
                     </div>
                 </div>
             </div>
+
+            <div class="brands-section">
+                <h3 class="section-title">أشهر الماركات</h3>
+                <div class="brands-grid" id="brandsGrid"></div>
+            </div>
         </div>
 
         <!-- VIN Search -->
@@ -1059,13 +1099,13 @@
                 <button class="back-btn" onclick="showHome()">
                     <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
                 </button>
-                <h2 class="form-title">البحث برقم الشاسيه</h2>
+                <h2 class="form-title">البحث برقم الهيكل</h2>
             </div>
 
             <div class="input-group">
-                <label class="input-label">أدخل رقم الشاسيه (VIN)</label>
+                <label class="input-label">أدخل رقم الهيكل (VIN)</label>
                 <input type="text" class="input-field vin-input" id="vinInput" placeholder="JT3BL1DZ0B..." maxlength="17" oninput="decodeVIN(this.value)">
-                <p style="font-size: 12px; color: var(--text-secondary); margin-top: 8px; text-align: center;">رقم الشاسيه يتكون من 17 حرف ورقم</p>
+                <p style="font-size: 12px; color: var(--text-secondary); margin-top: 8px; text-align: center;">رقم الهيكل يتكون من 17 حرف ورقم</p>
             </div>
 
             <div class="vin-info" id="vinInfo">
@@ -1088,7 +1128,7 @@
                 </div>
             </div>
 
-            <button class="submit-btn" id="vinSearchBtn" onclick="searchByVIN()" disabled>البحث عن القطع المتوافقة</button>
+            <button class="submit-btn" id="vinSearchBtn" onclick="searchByVIN()">البحث عن القطع المتوافقة</button>
         </div>
 
         <!-- Make/Model Search -->
@@ -1330,10 +1370,36 @@
                 </div>
                 <span class="nav-label">حسابي</span>
             </div>
+            <div class="nav-item" onclick="window.open('https://wa.me/966500000000?text=مرحباً، أحتاج مساعدة بخصوص قطع الغيار', '_blank')">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.077 4.928C17.191 3.041 14.683 2 12.006 2 6.798 2 2.55 6.247 2.543 11.455c-.002 1.676.436 3.311 1.266 4.748L2 22l5.932-1.56c1.387.757 2.949 1.156 4.537 1.156h.004c5.205 0 9.454-4.249 9.462-9.458.004-2.526-.979-4.9-2.758-6.68zm-7.07 14.56h-.003c-1.414 0-2.802-.38-4.01-1.096l-.288-.171-3.52.925.94-3.433-.188-.298c-.788-1.25-1.204-2.693-1.202-4.168.007-4.178 3.4-7.57 7.581-7.57 2.022.007 3.922.79 5.352 2.22 1.43 1.43 2.217 3.335 2.21 5.358-.008 4.18-3.402 7.573-7.582 7.573zm4.156-5.674c-.228-.114-1.35-.666-1.56-.742-.21-.076-.362-.114-.515.114-.152.228-.59.742-.724.894-.133.152-.266.171-.494.057-.228-.114-.963-.355-1.835-1.133-.679-.604-1.137-1.35-1.27-1.578-.133-.228-.015-.352.1-.465.104-.103.228-.267.342-.401.114-.133.152-.228.228-.38.076-.152.038-.285-.019-.399-.057-.114-.514-1.24-.705-1.698-.185-.444-.374-.384-.514-.39-.133-.006-.285-.006-.438-.006-.152 0-.398.057-.607.285-.209.228-.798.78-.798 1.902 0 1.122.817 2.207.932 2.36.114.152 1.608 2.455 3.895 3.444.544.235.97.376 1.302.482.547.175 1.045.15 1.438.091.439-.066 1.35-.552 1.54-1.085.19-.533.19-.99.133-1.085-.057-.095-.209-.152-.438-.266z"/></svg>
+                </div>
+                <span class="nav-label">واتساب</span>
+            </div>
         </nav>
     </div>
 
     <script>
+        // Brand icons mapping
+        const brandIcons = {
+            'Lexus': '🇯🇵', 'Toyota': '🇯🇵', 'Kia': '🇰🇷', 'Hyundai': '🇰🇷', 'Nissan': '🇯🇵', 'Mazda': '🇯🇵', 'Chery': '🇨🇳', 'Geely': '🇨🇳', 'GAC': '🇨🇳', 'MG': '🇬🇧', 'Changan': '🇨🇳', 'Ford': '🇺🇸', 'Chevrolet': '🇺🇸', 'GMC': '🇺🇸', 'Mercury': '🇺🇸', 'GM': '🇺🇸', 'Isuzu': '🇯🇵', 'Honda': '🇯🇵', 'Mitsubishi': '🇯🇵', 'Volvo': '🇸🇪'
+        };
+        const brandList = ['Lexus', 'Toyota', 'Kia', 'Hyundai', 'Nissan', 'Mazda', 'Chery', 'Geely', 'GAC', 'MG', 'Changan', 'Ford', 'Chevrolet', 'GMC', 'Mercury', 'GM', 'Isuzu', 'Honda', 'Mitsubishi', 'Volvo'];
+        
+        const brandsGrid = document.getElementById('brandsGrid');
+        brandList.forEach(brand => {
+            const brandDiv = document.createElement('div');
+            brandDiv.className = 'brand-item';
+            brandDiv.innerHTML = `<span class="brand-icon">${brandIcons[brand] || '🚗'}</span><span>${brand}</span>`;
+            brandDiv.onclick = () => { showSearch('make'); setTimeout(() => { document.getElementById('makeSelect').value = brand; updateModels(); }, 100); };
+            brandsGrid.appendChild(brandDiv);
+        });
+        
+        // Theme Toggle - main theme is white (light), dark secondary
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+        }
+        
         // Real WMI Database for VIN Decoding
         const wmiDatabase = {
             // Toyota & Lexus (Japan)
@@ -1604,11 +1670,6 @@
         let selectedCategory = null;
         let currentVINData = null;
 
-        // Theme Toggle
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-        }
-
         // Navigation
         function showHome() {
             document.querySelectorAll('.search-form, .results-section, .loading').forEach(el => {
@@ -1683,7 +1744,10 @@
         }
 
         function searchByVIN() {
-            if (!currentVINData) return;
+            if (!currentVINData) {
+                alert('الرجاء إدخال رقم هيكل صحيح');
+                return;
+            }
             performSearch();
         }
 
