@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>شرارة لقطع السيارات</title>
+    <title>أبو بسام لقطع السيارات</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -25,10 +25,9 @@
             --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F4D03F 50%, #D4AF37 100%);
             --gradient-dark: linear-gradient(180deg, #FFFFFF 0%, #F8F9FA 100%);
             --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.3);
-            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
-        /* Dark theme as secondary */
         body.dark-theme {
             --bg-dark: #0A0A0F;
             --bg-card: #12121A;
@@ -36,7 +35,7 @@
             --text-primary: #FFFFFF;
             --text-secondary: #A0A0B0;
             --gradient-dark: linear-gradient(180deg, #12121A 0%, #0A0A0F 100%);
-            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         body {
@@ -45,314 +44,352 @@
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
             transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.02) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
         }
 
         .app-container {
             max-width: 480px;
             margin: 0 auto;
             min-height: 100vh;
-            position: relative;
-            z-index: 1;
             background: var(--gradient-dark);
-            padding-bottom: 100px;
+            padding-bottom: 75px;
             transition: background 0.3s ease;
         }
 
-        /* Header */
+        /* Amazon-style Header */
         .header {
-            padding: 20px;
+            background: #232F3E;
+            padding: 12px 16px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            background: #F3F4F6;
-            backdrop-filter: blur(10px);
+            gap: 12px;
             position: sticky;
             top: 0;
-            z-index: 50;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 100;
         }
 
         body.dark-theme .header {
-            background: rgba(18, 18, 26, 0.8);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            background: #131921;
         }
 
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
+            flex-shrink: 0;
+            cursor: pointer;
         }
 
         .logo-icon {
-            width: 48px;
-            height: 48px;
+            width: 36px;
+            height: 36px;
             background: var(--gradient-gold);
-            border-radius: 12px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: var(--shadow-gold);
         }
 
         .logo-icon svg {
-            width: 28px;
-            height: 28px;
-            fill: #0A0A0F;
+            width: 20px;
+            height: 20px;
+            fill: #232F3E;
         }
 
         .logo-text h1 {
-            font-size: 20px;
-            font-weight: 800;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            background: none;
+            -webkit-text-fill-color: white;
         }
 
+        /* Header actions without search bar */
         .header-actions {
             display: flex;
             gap: 12px;
-            align-items: center;
+            flex-shrink: 0;
+            margin-right: auto;
         }
 
         .cart-btn, .user-btn, .theme-btn {
-            width: 44px;
-            height: 44px;
-            background: var(--bg-input);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 12px;
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .cart-btn:hover, .user-btn:hover, .theme-btn:hover {
-            background: var(--primary);
-            border-color: var(--primary);
         }
 
         .cart-btn svg, .user-btn svg, .theme-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: var(--text-primary);
+            width: 18px;
+            height: 18px;
+            fill: white;
         }
 
         .cart-count {
             position: absolute;
-            top: -6px;
-            right: -6px;
+            top: -4px;
+            right: -4px;
             background: #FF4444;
             color: white;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid var(--bg-dark);
         }
 
-        /* Hero Section with Image */
-        .hero-section {
-            position: relative;
-            height: 200px;
-            overflow: hidden;
-            margin: 20px;
-            border-radius: 20px;
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #232F3E 0%, #37475A 100%);
+            margin: 12px;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
         }
 
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.6);
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 24px;
-        }
-
-        .hero-title {
-            font-size: 24px;
-            font-weight: 800;
+        .hero-banner h2 {
+            color: white;
+            font-size: 18px;
             margin-bottom: 8px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            color: #FFFFFF;
         }
 
-        .hero-subtitle {
+        .hero-banner p {
+            color: #DDD;
+            font-size: 12px;
+        }
+
+        /* Promo Text */
+        .promo-text {
+            padding: 0 12px;
+            margin-bottom: 16px;
+        }
+
+        .promo-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 16px;
+            border-right: 4px solid var(--primary);
+            box-shadow: var(--shadow-card);
+        }
+
+        .promo-card p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        /* Search Bar Section - moved from header */
+        .search-bar-section {
+            padding: 0 12px;
+            margin: 16px 0;
+        }
+
+        .search-bar-container {
+            width: 100%;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 40px 12px 16px;
+            background: var(--bg-input);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
             font-size: 14px;
-            color: var(--text-secondary);
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.2s;
         }
 
-        /* Search Options */
-        .search-section {
-            padding: 0 20px;
-            margin-bottom: 24px;
+        .search-bar:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+        }
+
+        .search-icon-header {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            fill: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        /* Section Header */
+        .section-header {
+            padding: 0 12px;
+            margin: 20px 0 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
         }
 
         .section-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .section-link {
+            font-size: 12px;
+            color: var(--primary);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Horizontal Scroll Chips */
+        .chips-scroll {
+            padding: 0 12px;
+            overflow-x: auto;
             display: flex;
+            gap: 10px;
+            white-space: nowrap;
+            scrollbar-width: none;
+        }
+
+        .chips-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .chip {
+            background: var(--bg-card);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 30px;
+            padding: 8px 18px;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 24px;
-            background: var(--gradient-gold);
-            border-radius: 2px;
-        }
-
-        .search-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .search-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 16px;
-            padding: 20px 16px;
-            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-card);
         }
 
-        .search-card:hover {
-            transform: translateY(-4px);
+        .chip:hover, .chip.active {
             border-color: var(--primary);
-            box-shadow: var(--shadow-gold);
-        }
-
-        .search-icon {
-            width: 48px;
-            height: 48px;
             background: rgba(212, 175, 55, 0.1);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 12px;
-            transition: all 0.3s ease;
         }
 
-        .search-card:hover .search-icon {
-            background: var(--gradient-gold);
-            transform: scale(1.1);
-        }
-
-        .search-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--primary);
-            transition: all 0.3s ease;
-        }
-
-        .search-card:hover .search-icon svg {
-            fill: #0A0A0F;
-        }
-
-        .search-title {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .search-desc {
-            font-size: 11px;
-            color: var(--text-secondary);
-        }
-
-        /* Brands Section */
-        .brands-section {
-            padding: 0 20px;
-            margin-bottom: 24px;
-        }
-
+        /* Brand Grid */
         .brands-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
+            gap: 10px;
+            padding: 0 12px;
             margin-top: 12px;
         }
 
         .brand-item {
             background: var(--bg-card);
             border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 40px;
-            padding: 8px 18px;
+            border-radius: 30px;
+            padding: 6px 14px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-size: 13px;
+            gap: 6px;
+            font-size: 12px;
             font-weight: 600;
-            transition: all 0.3s ease;
             cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        /* Product Card - Amazon Style (Horizontal) */
+        .product-card {
+            background: var(--bg-card);
+            margin: 0 12px 12px 12px;
+            border-radius: 12px;
+            display: flex;
+            gap: 12px;
+            padding: 12px;
             box-shadow: var(--shadow-card);
+            transition: all 0.2s;
         }
 
-        .brand-item:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
+        .product-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: var(--bg-input);
+            flex-shrink: 0;
         }
 
-        .brand-icon {
-            font-size: 18px;
+        .product-details {
+            flex: 1;
         }
 
-        /* Search Forms */
+        .product-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-code {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 8px 0;
+        }
+
+        .product-location {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .add-to-cart-btn {
+            background: var(--gradient-gold);
+            border: none;
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #0A0A0F;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Search Forms (Modal-like appearance) */
         .search-form {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-dark);
+            z-index: 200;
+            overflow-y: auto;
             padding: 20px;
-            animation: slideUp 0.4s ease;
         }
 
         .search-form.active {
             display: block;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .form-header {
@@ -374,11 +411,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: var(--primary);
         }
 
         .back-btn svg {
@@ -406,29 +438,18 @@
 
         .input-field {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: var(--bg-input);
             border: 2px solid transparent;
             border-radius: 12px;
             color: var(--text-primary);
             font-family: 'Cairo', sans-serif;
             font-size: 16px;
-            transition: all 0.3s ease;
             outline: none;
         }
 
         .input-field:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
-        }
-
-        select.input-field {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='%23D4AF37' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: left 16px center;
-            padding-left: 16px;
         }
 
         .vin-input {
@@ -450,27 +471,6 @@
 
         .vin-info.active {
             display: block;
-            animation: slideUp 0.3s ease;
-        }
-
-        .vin-info-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-
-        .vin-info-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            margin-bottom: 6px;
-            color: var(--text-secondary);
-        }
-
-        .vin-info-value {
-            color: var(--text-primary);
-            font-weight: 600;
         }
 
         .category-grid {
@@ -495,48 +495,24 @@
             background: rgba(212, 175, 55, 0.1);
         }
 
-        .category-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .category-name {
-            font-size: 13px;
-            font-weight: 600;
-        }
-
         .submit-btn {
             width: 100%;
-            padding: 18px;
+            padding: 16px;
             background: var(--gradient-gold);
             border: none;
-            border-radius: 14px;
+            border-radius: 12px;
             color: #0A0A0F;
             font-family: 'Cairo', sans-serif;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
             cursor: pointer;
             margin-top: 24px;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-gold);
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(212, 175, 55, 0.5);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
         }
 
         /* Results Section */
         .results-section {
             display: none;
             padding: 20px;
-            animation: slideUp 0.4s ease;
         }
 
         .results-section.active {
@@ -547,359 +523,7 @@
             font-size: 14px;
             color: var(--text-secondary);
             margin-bottom: 16px;
-        }
-
-        .part-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .part-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-card);
-        }
-
-        .part-image {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            background: var(--bg-input);
-        }
-
-        .part-content {
-            padding: 16px;
-        }
-
-        .part-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .part-title {
-            font-size: 16px;
-            font-weight: 700;
-            flex: 1;
-        }
-
-        .part-price {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--primary);
-            margin-right: 8px;
-        }
-
-        .part-code {
-            font-size: 12px;
-            color: var(--text-secondary);
-            background: var(--bg-input);
-            padding: 4px 8px;
-            border-radius: 6px;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
-
-        .part-details {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
-
-        .part-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .add-cart-btn {
-            flex: 1;
-            padding: 12px;
-            background: var(--gradient-gold);
-            border: none;
-            border-radius: 10px;
-            color: #0A0A0F;
-            font-family: 'Cairo', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .add-cart-btn:hover {
-            transform: scale(1.02);
-            box-shadow: var(--shadow-gold);
-        }
-
-        .add-cart-btn svg {
-            width: 18px;
-            height: 18px;
-            fill: #0A0A0F;
-        }
-
-        .wishlist-btn {
-            width: 44px;
-            height: 44px;
-            background: var(--bg-input);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .wishlist-btn:hover {
-            background: rgba(255, 68, 68, 0.1);
-            border-color: #FF4444;
-        }
-
-        .wishlist-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--text-secondary);
-            transition: all 0.3s ease;
-        }
-
-        .wishlist-btn:hover svg {
-            fill: #FF4444;
-        }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            z-index: 200;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-            align-items: flex-end;
-            opacity: 1;
-        }
-
-        .modal-content {
-            background: var(--bg-card);
-            width: 100%;
-            max-width: 480px;
-            margin: 0 auto;
-            border-radius: 24px 24px 0 0;
-            max-height: 85vh;
-            overflow-y: auto;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .modal-overlay.active .modal-content {
-            transform: translateY(0);
-        }
-
-        .modal-header {
-            padding: 24px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            background: var(--bg-card);
-            z-index: 10;
-        }
-
-        .modal-title {
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        .close-modal {
-            width: 40px;
-            height: 40px;
-            background: var(--bg-input);
-            border: none;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .close-modal svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--text-primary);
-        }
-
-        /* Cart */
-        .cart-items {
-            padding: 20px;
-        }
-
-        .cart-item {
-            display: flex;
-            gap: 16px;
-            background: var(--bg-input);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-
-        .cart-item-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 8px;
-            object-fit: cover;
-            background: var(--bg-card);
-        }
-
-        .cart-item-details {
-            flex: 1;
-        }
-
-        .cart-item-title {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .cart-item-price {
-            font-size: 16px;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-
-        .cart-item-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .qty-btn {
-            width: 32px;
-            height: 32px;
-            background: var(--bg-card);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text-primary);
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .qty-text {
-            font-size: 14px;
-            font-weight: 600;
-            min-width: 24px;
-            text-align: center;
-        }
-
-        .remove-item {
-            margin-right: auto;
-            color: #FF4444;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .cart-empty {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-secondary);
-        }
-
-        .cart-empty-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-            opacity: 0.5;
-        }
-
-        .cart-footer {
-            padding: 20px;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-            background: var(--bg-card);
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            font-size: 18px;
-        }
-
-        .cart-total-value {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary);
-        }
-
-        .checkout-btn {
-            width: 100%;
-            padding: 18px;
-            background: var(--gradient-gold);
-            border: none;
-            border-radius: 14px;
-            color: #0A0A0F;
-            font-family: 'Cairo', sans-serif;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        /* Auth */
-        .auth-tabs {
-            display: flex;
-            gap: 12px;
-            padding: 0 24px 20px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-        }
-
-        .auth-tab {
-            flex: 1;
-            padding: 12px;
-            background: transparent;
-            border: 2px solid rgba(212, 175, 55, 0.2);
-            border-radius: 10px;
-            color: var(--text-secondary);
-            font-family: 'Cairo', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .auth-tab.active {
-            background: var(--gradient-gold);
-            border-color: var(--primary);
-            color: #0A0A0F;
-        }
-
-        .auth-form {
-            padding: 24px;
-        }
-
-        .auth-input {
-            margin-bottom: 16px;
+            padding: 0 12px;
         }
 
         /* Loading */
@@ -914,8 +538,8 @@
         }
 
         .spinner {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border: 3px solid rgba(212, 175, 55, 0.2);
             border-top-color: var(--primary);
             border-radius: 50%;
@@ -927,7 +551,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Bottom Nav */
+        /* Bottom Navigation - Amazon Style */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -935,17 +559,13 @@
             transform: translateX(-50%);
             width: 100%;
             max-width: 480px;
-            background: #F3F4F6;
-            backdrop-filter: blur(20px);
+            background: var(--bg-card);
             border-top: 1px solid rgba(212, 175, 55, 0.1);
-            padding: 12px 24px 24px;
+            padding: 8px 16px 20px;
             display: flex;
             justify-content: space-around;
             z-index: 100;
-        }
-
-        body.dark-theme .bottom-nav {
-            background: rgba(18, 18, 26, 0.95);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
         }
 
         .nav-item {
@@ -954,76 +574,134 @@
             align-items: center;
             gap: 4px;
             cursor: pointer;
-            padding: 8px 16px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
+            padding: 6px 12px;
+            border-radius: 8px;
             color: var(--text-secondary);
+            transition: all 0.2s;
         }
 
         .nav-item.active {
             color: var(--primary);
         }
 
-        .nav-item.active .nav-icon {
-            background: var(--gradient-gold);
-        }
-
-        .nav-item.active .nav-icon svg {
-            fill: #0A0A0F;
-        }
-
         .nav-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-input);
-            transition: all 0.3s ease;
+            width: 24px;
+            height: 24px;
         }
 
         .nav-icon svg {
-            width: 22px;
-            height: 22px;
-            fill: var(--text-secondary);
-            transition: all 0.3s ease;
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
         }
 
         .nav-label {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
         }
 
-        .nav-item.active .nav-label {
-            color: var(--primary);
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 200;
+            display: none;
+            align-items: flex-end;
         }
 
-        @media (max-width: 380px) {
-            .search-grid {
-                grid-template-columns: 1fr;
-            }
+        .modal-overlay.active {
+            display: flex;
         }
 
-        ::-webkit-scrollbar {
-            width: 0;
-            height: 0;
+        .modal-content {
+            background: var(--bg-card);
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            border-radius: 20px 20px 0 0;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-modal {
+            width: 36px;
+            height: 36px;
+            background: var(--bg-input);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: var(--bg-input);
+            margin: 8px 16px;
+            border-radius: 12px;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .cart-total {
+            padding: 16px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+        }
+
+        .checkout-btn {
+            width: calc(100% - 32px);
+            margin: 16px;
+            padding: 14px;
+            background: var(--gradient-gold);
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        
+        /* Search result container */
+        .search-result-container {
+            padding: 0 12px;
+            margin: 16px 0;
+        }
+        
+        .search-result-container .product-card {
+            margin: 0 0 12px 0;
         }
     </style>
-<base target="_blank">
 </head>
 <body>
     <div class="app-container">
-        <!-- Header -->
+        <!-- Header without search bar -->
         <header class="header">
-            <div class="logo-section">
+            <div class="logo-section" onclick="showHome()">
                 <div class="logo-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                     </svg>
                 </div>
                 <div class="logo-text">
-                    <h1>شرارة لقطع السيارات</h1>
+                    <h1>أبو بسام</h1>
                 </div>
             </div>
             <div class="header-actions">
@@ -1040,71 +718,64 @@
             </div>
         </header>
 
-        <!-- Home Page -->
+        <!-- Home Page Content -->
         <div id="homePage" class="page active">
-            <div class="hero-section">
-                <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&auto=format&fit=crop&q=80" alt="Auto Parts" class="hero-image">
-                <div class="hero-overlay">
-                    <h2 class="hero-title">أفضل قطع الغيار الأصلية</h2>
-                    <p class="hero-subtitle">اكتشف تشكيلتنا الواسعة من قطع الغيار الأصلية والمتوافقة</p>
-                </div>
+            <!-- Hero Banner -->
+            <div class="hero-banner">
+                <h2>أفضل قطع الغيار الأصلية</h2>
+                <p>اكتشف تشكيلتنا الواسعة من قطع الغيار الأصلية والمتوافقة</p>
             </div>
 
-            <!-- New Promotional Text Block (Background Removed) -->
-            <div style="padding: 0 20px; margin-bottom: 16px;">
-                <div style="border-right: 4px solid #D4AF37; border-radius: 12px; padding: 16px;">
-                    <p style="font-size: 14px; font-weight: 500; line-height: 1.7; margin: 0; color: var(--text-primary);">
-                        تطبيق شرارة – قطع غيار السيارات بسرعة وموثوقية<br><br>
-                        مع تطبيق شرارة، نوفر لك قطع غيار السيارات لأكثر من 19 شركة مختلفة في مكان واحد. سواء كنت تبحث عن قطعة نادرة أو شائعة، نوصلها لك خلال 7 أيام كحد أقصى. وفر وقتك وجهدك، واستلم قطعك وأنت في مكانك.<br><br>
-                        شرارة … وصول سريع، قطع موثوقة.
+            <!-- Promo Text -->
+            <div class="promo-text">
+                <div class="promo-card">
+                    <p>
+                        <strong>تطبيق أبو بسام</strong> – قطع غيار السيارات بسرعة وموثوقية<br><br>
+                        مع تطبيق أبو بسام، نوفر لك قطع غيار السيارات لأكثر من 19 شركة مختلفة في مكان واحد. سواء كنت تبحث عن قطعة نادرة أو شائعة، نوصلها لك خلال 7 أيام كحد أقصى. وفر وقتك وجهدك، واستلم قطعك وأنت في مكانك.<br><br>
+                        <strong>أبو بسام … وصول سريع، قطع موثوقة.</strong>
                     </p>
                 </div>
             </div>
 
-            <div class="search-section">
-                <h3 class="section-title">اختر طريقة البحث</h3>
-                <div class="search-grid">
-                    <div class="search-card" onclick="showSearch('vin')">
-                        <div class="search-icon">
-                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                        </div>
-                        <h4 class="search-title">البحث برقم الهيكل</h4>
-                        <p class="search-desc">VIN Decoder</p>
-                    </div>
-
-                    <div class="search-card" onclick="showSearch('make')">
-                        <div class="search-icon">
-                            <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
-                        </div>
-                        <h4 class="search-title">النوع والموديل</h4>
-                        <p class="search-desc">Make & Model</p>
-                    </div>
-
-                    <div class="search-card" onclick="showSearch('part')">
-                        <div class="search-icon">
-                            <svg viewBox="0 0 24 24"><path d="M11 18h2v-3h3v-2h-3v-3h-2v3H8v2h3v3zm1-12c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9 4.03-9 9-9zm0-2C6.48 4 2 8.48 2 14s4.48 10 10 10 10-4.48 10-10S17.52 4 12 4z"/></svg>
-                        </div>
-                        <h4 class="search-title">رقم القطعة</h4>
-                        <p class="search-desc">Part Number</p>
-                    </div>
-
-                    <div class="search-card" onclick="showSearch('category')">
-                        <div class="search-icon">
-                            <svg viewBox="0 0 24 24"><path d="M12 2l-5.5 9h11z M12 5.84L13.93 9h-3.87z M17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5z M5 21.5h8v-8H5v8z"/></svg>
-                        </div>
-                        <h4 class="search-title">الفئات</h4>
-                        <p class="search-desc">Categories</p>
-                    </div>
+            <!-- Search Bar Section -->
+            <div class="search-bar-section">
+                <div class="search-bar-container">
+                    <input type="text" class="search-bar" placeholder="ابحث عن قطع غيار..." id="globalSearch" onkeypress="if(event.key==='Enter') globalSearch()">
+                    <svg class="search-icon-header" viewBox="0 0 24 24" fill="currentColor" onclick="globalSearch()">
+                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
                 </div>
             </div>
 
-            <div class="brands-section">
-                <h3 class="section-title">أشهر الماركات</h3>
-                <div class="brands-grid" id="brandsGrid"></div>
+            <!-- Search Chips (ابحث بـ) -->
+            <div class="section-header">
+                <span class="section-title">ابحث بـ</span>
             </div>
+            <div class="chips-scroll">
+                <div class="chip" onclick="showSearch('vin')">🔍 رقم الهيكل (VIN)</div>
+                <div class="chip" onclick="showSearch('make')">🚗 النوع والموديل</div>
+                <div class="chip" onclick="showSearch('part')">🔢 رقم القطعة</div>
+                <div class="chip" onclick="showSearch('category')">📂 الفئات</div>
+            </div>
+
+            <!-- Search Results Container -->
+            <div class="search-result-container" id="homeSearchResults"></div>
+
+            <!-- Featured Products Section (Most Ordered Parts) - Moved above Popular Brands -->
+            <div class="section-header">
+                <span class="section-title">القطع الأكثر طلباً</span>
+            </div>
+            <div id="featuredProducts"></div>
+
+            <!-- Popular Brands -->
+            <div class="section-header">
+                <span class="section-title">أشهر الماركات</span>
+                <span class="section-link" onclick="showSearch('make')">عرض الكل</span>
+            </div>
+            <div class="brands-grid" id="brandsGrid"></div>
         </div>
 
-        <!-- VIN Search -->
+        <!-- Search Forms (Modal style) -->
         <div id="vinSearch" class="search-form">
             <div class="form-header">
                 <button class="back-btn" onclick="showHome()">
@@ -1112,873 +783,219 @@
                 </button>
                 <h2 class="form-title">البحث برقم الهيكل</h2>
             </div>
-
             <div class="input-group">
                 <label class="input-label">أدخل رقم الهيكل (VIN)</label>
                 <input type="text" class="input-field vin-input" id="vinInput" placeholder="JT3BL1DZ0B..." maxlength="17" oninput="decodeVIN(this.value)">
-                <p style="font-size: 12px; color: var(--text-secondary); margin-top: 8px; text-align: center;">رقم الهيكل يتكون من 17 حرف ورقم</p>
             </div>
-
             <div class="vin-info" id="vinInfo">
                 <div class="vin-info-title">معلومات المركبة المكتشفة</div>
-                <div class="vin-info-row">
-                    <span>الشركة المصنعة:</span>
-                    <span class="vin-info-value" id="vinMake">-</span>
-                </div>
-                <div class="vin-info-row">
-                    <span>الدولة:</span>
-                    <span class="vin-info-value" id="vinCountry">-</span>
-                </div>
-                <div class="vin-info-row">
-                    <span>سنة الصنع:</span>
-                    <span class="vin-info-value" id="vinYear">-</span>
-                </div>
-                <div class="vin-info-row">
-                    <span>نوع المركبة:</span>
-                    <span class="vin-info-value" id="vinType">-</span>
-                </div>
+                <div class="vin-info-row"><span>الشركة المصنعة:</span><span id="vinMake">-</span></div>
+                <div class="vin-info-row"><span>الدولة:</span><span id="vinCountry">-</span></div>
+                <div class="vin-info-row"><span>سنة الصنع:</span><span id="vinYear">-</span></div>
+                <div class="vin-info-row"><span>نوع المركبة:</span><span id="vinType">-</span></div>
             </div>
-
             <button class="submit-btn" id="vinSearchBtn" onclick="searchByVIN()">البحث عن القطع المتوافقة</button>
         </div>
 
-        <!-- Make/Model Search -->
         <div id="makeSearch" class="search-form">
-            <div class="form-header">
-                <button class="back-btn" onclick="showHome()">
-                    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-                </button>
-                <h2 class="form-title">البحث بالنوع والموديل</h2>
-            </div>
-
-            <div class="input-group">
-                <label class="input-label">الشركة المصنعة</label>
-                <select class="input-field" id="makeSelect" onchange="updateModels()">
-                    <option value="">اختر الشركة</option>
-                    <option value="Lexus">Lexus - لكزس</option>
-                    <option value="Toyota">Toyota - تويوتا</option>
-                    <option value="Kia">Kia - كيا</option>
-                    <option value="Hyundai">Hyundai - هيونداي</option>
-                    <option value="Nissan">Nissan - نيسان</option>
-                    <option value="Mazda">Mazda - مازدا</option>
-                    <option value="Chery">Chery - شيري</option>
-                    <option value="Geely">Geely - جيلي</option>
-                    <option value="GAC">GAC - جي أي سي</option>
-                    <option value="MG">MG - إم جي</option>
-                    <option value="Changan">Changan - شانجان</option>
-                    <option value="Ford">Ford - فورد</option>
-                    <option value="Chevrolet">Chevrolet - شيفروليه</option>
-                    <option value="GMC">GMC - جي إم سي</option>
-                    <option value="Mercury">Mercury - ميركوري</option>
-                    <option value="GM">GM - جنرال موتورز</option>
-                    <option value="Isuzu">Isuzu - إيسوزو</option>
-                    <option value="Honda">Honda - هوندا</option>
-                    <option value="Mitsubishi">Mitsubishi - ميتسوبيشي</option>
-                    <option value="Volvo">Volvo - فولفو</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label class="input-label">الموديل</label>
-                <select class="input-field" id="modelSelect" disabled>
-                    <option value="">اختر الموديل</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label class="input-label">سنة الصنع</label>
-                <select class="input-field" id="yearSelect">
-                    <option value="">اختر السنة</option>
-                    <option value="2025">2025</option>
-                    <option value="2024">2024</option>
-                    <option value="2023">2023</option>
-                    <option value="2022">2022</option>
-                    <option value="2021">2021</option>
-                    <option value="2020">2020</option>
-                    <option value="2019">2019</option>
-                    <option value="2018">2018</option>
-                    <option value="2017">2017</option>
-                    <option value="2016">2016</option>
-                    <option value="2015">2015</option>
-                </select>
-            </div>
-
+            <div class="form-header"><button class="back-btn" onclick="showHome()"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button><h2 class="form-title">البحث بالنوع والموديل</h2></div>
+            <div class="input-group"><label class="input-label">الشركة المصنعة</label><select class="input-field" id="makeSelect" onchange="updateModels()"><option value="">اختر الشركة</option><option value="Lexus">Lexus</option><option value="Toyota">Toyota</option><option value="Kia">Kia</option><option value="Hyundai">Hyundai</option><option value="Nissan">Nissan</option><option value="Mazda">Mazda</option><option value="Chery">Chery</option><option value="Geely">Geely</option><option value="GAC">GAC</option><option value="MG">MG</option><option value="Changan">Changan</option><option value="Ford">Ford</option><option value="Chevrolet">Chevrolet</option><option value="Honda">Honda</option><option value="Mitsubishi">Mitsubishi</option></select></div>
+            <div class="input-group"><label class="input-label">الموديل</label><select class="input-field" id="modelSelect" disabled><option value="">اختر الموديل</option></select></div>
+            <div class="input-group"><label class="input-label">سنة الصنع</label><select class="input-field" id="yearSelect"><option value="">اختر السنة</option><option>2025</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option><option>2020</option></select></div>
             <button class="submit-btn" onclick="searchByMake()">البحث عن القطع</button>
         </div>
 
-        <!-- Part Number Search -->
         <div id="partSearch" class="search-form">
-            <div class="form-header">
-                <button class="back-btn" onclick="showHome()">
-                    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-                </button>
-                <h2 class="form-title">البحث برقم القطعة</h2>
-            </div>
-
-            <div class="input-group">
-                <label class="input-label">رقم القطعة OEM</label>
-                <input type="text" class="input-field" id="partInput" placeholder="مثال: 90919-02244">
-            </div>
-
-            <div class="input-group">
-                <label class="input-label">اسم القطعة (اختياري)</label>
-                <input type="text" class="input-field" placeholder="مثال: فلتر زيت، فرامل أمامية">
-            </div>
-
+            <div class="form-header"><button class="back-btn" onclick="showHome()"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button><h2 class="form-title">البحث برقم القطعة</h2></div>
+            <div class="input-group"><label class="input-label">رقم القطعة OEM</label><input type="text" class="input-field" id="partInput" placeholder="مثال: 90919-02244"></div>
             <button class="submit-btn" onclick="searchByPart()">البحث</button>
         </div>
 
-        <!-- Category Search -->
         <div id="categorySearch" class="search-form">
-            <div class="form-header">
-                <button class="back-btn" onclick="showHome()">
-                    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-                </button>
-                <h2 class="form-title">البحث بالفئة</h2>
+            <div class="form-header"><button class="back-btn" onclick="showHome()"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button><h2 class="form-title">البحث بالفئة</h2></div>
+            <div class="category-grid">
+                <div class="category-item" onclick="selectCategory(this, 'engine')"><div class="category-icon">🔧</div><div class="category-name">المحرك</div></div>
+                <div class="category-item" onclick="selectCategory(this, 'brakes')"><div class="category-icon">🛑</div><div class="category-name">الفرامل</div></div>
+                <div class="category-item" onclick="selectCategory(this, 'suspension')"><div class="category-icon">🛞</div><div class="category-name">الكفرات</div></div>
+                <div class="category-item" onclick="selectCategory(this, 'electrical')"><div class="category-icon">⚡</div><div class="category-name">الكهرباء</div></div>
+                <div class="category-item" onclick="selectCategory(this, 'transmission')"><div class="category-icon">⚙️</div><div class="category-name">الناقل</div></div>
+                <div class="category-item" onclick="selectCategory(this, 'body')"><div class="category-icon">🚗</div><div class="category-name">الهيكل</div></div>
+                <div class="category-item" onclick="selectCategory(this, 'ac')"><div class="category-icon">❄️</div><div class="category-name">التكييف</div></div>
+                <div class="category-item" onclick="selectCategory(this, 'filters')"><div class="category-icon">🔄</div><div class="category-name">الفلاتر</div></div>
             </div>
-
-            <div class="input-group">
-                <label class="input-label">اختر فئة القطع</label>
-                <div class="category-grid">
-                    <div class="category-item" onclick="selectCategory(this, 'engine')">
-                        <div class="category-icon">🔧</div>
-                        <div class="category-name">المحرك</div>
-                    </div>
-                    <div class="category-item" onclick="selectCategory(this, 'brakes')">
-                        <div class="category-icon">🛑</div>
-                        <div class="category-name">الفرامل</div>
-                    </div>
-                    <div class="category-item" onclick="selectCategory(this, 'suspension')">
-                        <div class="category-icon">🛞</div>
-                        <div class="category-name">الكفرات</div>
-                    </div>
-                    <div class="category-item" onclick="selectCategory(this, 'electrical')">
-                        <div class="category-icon">⚡</div>
-                        <div class="category-name">الكهرباء</div>
-                    </div>
-                    <div class="category-item" onclick="selectCategory(this, 'transmission')">
-                        <div class="category-icon">⚙️</div>
-                        <div class="category-name">الناقل</div>
-                    </div>
-                    <div class="category-item" onclick="selectCategory(this, 'body')">
-                        <div class="category-icon">🚗</div>
-                        <div class="category-name">الهيكل</div>
-                    </div>
-                    <div class="category-item" onclick="selectCategory(this, 'ac')">
-                        <div class="category-icon">❄️</div>
-                        <div class="category-name">التكييف</div>
-                    </div>
-                    <div class="category-item" onclick="selectCategory(this, 'filters')">
-                        <div class="category-icon">🔄</div>
-                        <div class="category-name">الفلاتر</div>
-                    </div>
-                </div>
-            </div>
-
             <button class="submit-btn" onclick="searchByCategory()">عرض القطع</button>
         </div>
 
-        <!-- Loading -->
-        <div id="loading" class="loading">
-            <div class="spinner"></div>
-            <p>جاري البحث...</p>
-        </div>
-
-        <!-- Results -->
+        <!-- Loading & Results -->
+        <div id="loading" class="loading"><div class="spinner"></div><p>جاري البحث...</p></div>
         <div id="results" class="results-section">
-            <div class="form-header">
-                <button class="back-btn" onclick="showHome()">
-                    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-                </button>
-                <h2 class="form-title">نتائج البحث</h2>
-            </div>
+            <div class="form-header"><button class="back-btn" onclick="showHome()"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button><h2 class="form-title">نتائج البحث</h2></div>
             <p class="results-count">تم العثور على <span id="resultsNumber">0</span> قطعة</p>
             <div id="resultsList"></div>
         </div>
 
-        <!-- Cart Modal -->
-        <div class="modal-overlay" id="cartModal" onclick="closeCart(event)">
-            <div class="modal-content" onclick="event.stopPropagation()">
-                <div class="modal-header">
-                    <h3 class="modal-title">سلة التسوق</h3>
-                    <button class="close-modal" onclick="closeCart()">
-                        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                    </button>
-                </div>
-                <div class="cart-items" id="cartItems">
-                    <div class="cart-empty">
-                        <div class="cart-empty-icon">🛒</div>
-                        <p>السلة فارغة</p>
-                    </div>
-                </div>
-                <div class="cart-footer" id="cartFooter" style="display: none;">
-                    <div class="cart-total">
-                        <span>الإجمالي:</span>
-                        <span class="cart-total-value" id="cartTotal">0 ر.س</span>
-                    </div>
-                    <button class="checkout-btn">إتمام الشراء</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Auth Modal -->
-        <div class="modal-overlay" id="authModal" onclick="closeAuth(event)">
-            <div class="modal-content" onclick="event.stopPropagation()">
-                <div class="modal-header">
-                    <h3 class="modal-title">حسابي</h3>
-                    <button class="close-modal" onclick="closeAuth()">
-                        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                    </button>
-                </div>
-                <div class="auth-tabs">
-                    <button class="auth-tab active" onclick="switchTab('login')">تسجيل الدخول</button>
-                    <button class="auth-tab" onclick="switchTab('register')">إنشاء حساب</button>
-                </div>
-                <div class="auth-form" id="loginForm">
-                    <div class="input-group">
-                        <label class="input-label">رقم الجوال أو البريد الإلكتروني</label>
-                        <input type="text" class="input-field auth-input" placeholder="example@email.com">
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label">كلمة المرور</label>
-                        <input type="password" class="input-field auth-input" placeholder="••••••••">
-                    </div>
-                    <button class="submit-btn">تسجيل الدخول</button>
-                </div>
-                <div class="auth-form" id="registerForm" style="display: none;">
-                    <div class="input-group">
-                        <label class="input-label">الاسم الكامل</label>
-                        <input type="text" class="input-field auth-input" placeholder="محمد أحمد">
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label">رقم الجوال</label>
-                        <input type="tel" class="input-field auth-input" placeholder="05xxxxxxxx">
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label">البريد الإلكتروني</label>
-                        <input type="email" class="input-field auth-input" placeholder="example@email.com">
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label">كلمة المرور</label>
-                        <input type="password" class="input-field auth-input" placeholder="••••••••">
-                    </div>
-                    <button class="submit-btn">إنشاء حساب</button>
-                </div>
-            </div>
-        </div>
+        <!-- Modals -->
+        <div class="modal-overlay" id="cartModal" onclick="closeCart(event)"><div class="modal-content" onclick="event.stopPropagation()"><div class="modal-header"><h3>سلة التسوق</h3><button class="close-modal" onclick="closeCart()">✕</button></div><div id="cartItems"></div><div id="cartFooter" style="display:none"><div class="cart-total"><span>الإجمالي:</span><span id="cartTotal">0 ر.س</span></div><button class="checkout-btn">إتمام الشراء</button></div></div></div>
+        <div class="modal-overlay" id="authModal" onclick="closeAuth(event)"><div class="modal-content" onclick="event.stopPropagation()"><div class="modal-header"><h3>حسابي</h3><button class="close-modal" onclick="closeAuth()">✕</button></div><div class="auth-tabs" style="display:flex;padding:16px"><button class="auth-tab active" onclick="switchTab('login')">تسجيل الدخول</button><button class="auth-tab" onclick="switchTab('register')">إنشاء حساب</button></div><div id="loginForm" class="auth-form" style="padding:16px"><input type="text" class="input-field" placeholder="البريد الإلكتروني" style="margin-bottom:12px"><input type="password" class="input-field" placeholder="كلمة المرور"><button class="submit-btn" style="margin-top:16px">تسجيل الدخول</button></div><div id="registerForm" style="display:none;padding:16px"><input type="text" class="input-field" placeholder="الاسم الكامل" style="margin-bottom:12px"><input type="tel" class="input-field" placeholder="رقم الجوال" style="margin-bottom:12px"><input type="email" class="input-field" placeholder="البريد الإلكتروني" style="margin-bottom:12px"><input type="password" class="input-field" placeholder="كلمة المرور"><button class="submit-btn" style="margin-top:16px">إنشاء حساب</button></div></div></div>
 
         <!-- Bottom Navigation -->
         <nav class="bottom-nav">
-            <div class="nav-item active" onclick="showHome()">
-                <div class="nav-icon">
-                    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-                </div>
-                <span class="nav-label">الرئيسية</span>
-            </div>
-            <div class="nav-item" onclick="openAuth()">
-                <div class="nav-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                </div>
-                <span class="nav-label">حسابي</span>
-            </div>
-            <div class="nav-item" onclick="window.open('https://wa.me/966500000000?text=مرحباً، أحتاج مساعدة بخصوص قطع الغيار', '_blank')">
-                <div class="nav-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.077 4.928C17.191 3.041 14.683 2 12.006 2 6.798 2 2.55 6.247 2.543 11.455c-.002 1.676.436 3.311 1.266 4.748L2 22l5.932-1.56c1.387.757 2.949 1.156 4.537 1.156h.004c5.205 0 9.454-4.249 9.462-9.458.004-2.526-.979-4.9-2.758-6.68zm-7.07 14.56h-.003c-1.414 0-2.802-.38-4.01-1.096l-.288-.171-3.52.925.94-3.433-.188-.298c-.788-1.25-1.204-2.693-1.202-4.168.007-4.178 3.4-7.57 7.581-7.57 2.022.007 3.922.79 5.352 2.22 1.43 1.43 2.217 3.335 2.21 5.358-.008 4.18-3.402 7.573-7.582 7.573zm4.156-5.674c-.228-.114-1.35-.666-1.56-.742-.21-.076-.362-.114-.515.114-.152.228-.59.742-.724.894-.133.152-.266.171-.494.057-.228-.114-.963-.355-1.835-1.133-.679-.604-1.137-1.35-1.27-1.578-.133-.228-.015-.352.1-.465.104-.103.228-.267.342-.401.114-.133.152-.228.228-.38.076-.152.038-.285-.019-.399-.057-.114-.514-1.24-.705-1.698-.185-.444-.374-.384-.514-.39-.133-.006-.285-.006-.438-.006-.152 0-.398.057-.607.285-.209.228-.798.78-.798 1.902 0 1.122.817 2.207.932 2.36.114.152 1.608 2.455 3.895 3.444.544.235.97.376 1.302.482.547.175 1.045.15 1.438.091.439-.066 1.35-.552 1.54-1.085.19-.533.19-.99.133-1.085-.057-.095-.209-.152-.438-.266z"/></svg>
-                </div>
-                <span class="nav-label">تواصل معنا</span>
-            </div>
+            <div class="nav-item active" onclick="showHome()"><div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div><span class="nav-label">الرئيسية</span></div>
+            <div class="nav-item" onclick="openAuth()"><div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div><span class="nav-label">حسابي</span></div>
+            <div class="nav-item" onclick="window.open('https://wa.me/966500000000?text=مرحباً، أحتاج مساعدة', '_blank')"><div class="nav-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.077 4.928C17.191 3.041 14.683 2 12.006 2 6.798 2 2.55 6.247 2.543 11.455c-.002 1.676.436 3.311 1.266 4.748L2 22l5.932-1.56c1.387.757 2.949 1.156 4.537 1.156h.004c5.205 0 9.454-4.249 9.462-9.458.004-2.526-.979-4.9-2.758-6.68z"/></svg></div><span class="nav-label">الدعم</span></div>
         </nav>
     </div>
 
     <script>
-        // Brand icons mapping
-        const brandIcons = {
-            'Lexus': '🇯🇵', 'Toyota': '🇯🇵', 'Kia': '🇰🇷', 'Hyundai': '🇰🇷', 'Nissan': '🇯🇵', 'Mazda': '🇯🇵', 'Chery': '🇨🇳', 'Geely': '🇨🇳', 'GAC': '🇨🇳', 'MG': '🇬🇧', 'Changan': '🇨🇳', 'Ford': '🇺🇸', 'Chevrolet': '🇺🇸', 'GMC': '🇺🇸', 'Mercury': '🇺🇸', 'GM': '🇺🇸', 'Isuzu': '🇯🇵', 'Honda': '🇯🇵', 'Mitsubishi': '🇯🇵', 'Volvo': '🇸🇪'
-        };
-        const brandList = ['Lexus', 'Toyota', 'Kia', 'Hyundai', 'Nissan', 'Mazda', 'Chery', 'Geely', 'GAC', 'MG', 'Changan', 'Ford', 'Chevrolet', 'GMC', 'Mercury', 'GM', 'Isuzu', 'Honda', 'Mitsubishi', 'Volvo'];
-        
+        const brandIcons = {'Lexus':'🇯🇵','Toyota':'🇯🇵','Kia':'🇰🇷','Hyundai':'🇰🇷','Nissan':'🇯🇵','Mazda':'🇯🇵','Chery':'🇨🇳','Geely':'🇨🇳','GAC':'🇨🇳','MG':'🇬🇧','Changan':'🇨🇳','Ford':'🇺🇸','Chevrolet':'🇺🇸','Honda':'🇯🇵','Mitsubishi':'🇯🇵'};
+        const brandList = ['Lexus','Toyota','Kia','Hyundai','Nissan','Mazda','Chery','Geely','GAC','MG','Changan','Ford','Chevrolet','Honda','Mitsubishi'];
         const brandsGrid = document.getElementById('brandsGrid');
         brandList.forEach(brand => {
-            const brandDiv = document.createElement('div');
-            brandDiv.className = 'brand-item';
-            brandDiv.innerHTML = `<span class="brand-icon">${brandIcons[brand] || '🚗'}</span><span>${brand}</span>`;
-            brandDiv.onclick = () => { showSearch('make'); setTimeout(() => { document.getElementById('makeSelect').value = brand; updateModels(); }, 100); };
-            brandsGrid.appendChild(brandDiv);
+            const div = document.createElement('div');
+            div.className = 'brand-item';
+            div.innerHTML = `<span>${brandIcons[brand]||'🚗'}</span><span>${brand}</span>`;
+            div.onclick = () => { showSearch('make'); setTimeout(()=>{ document.getElementById('makeSelect').value=brand; updateModels(); },100); };
+            brandsGrid.appendChild(div);
         });
-        
-        // Theme Toggle - main theme is white (light), dark secondary
-        function toggleTheme() {
-            document.body.classList.toggle('dark-theme');
-        }
-        
-        // Real WMI Database for VIN Decoding
-        const wmiDatabase = {
-            // Toyota & Lexus (Japan)
-            'JT3': { make: 'Toyota', country: 'اليابان', type: 'MPV/SUV' },
-            'JT4': { make: 'Toyota', country: 'اليابان', type: 'شاحنة/فان' },
-            'JT6': { make: 'Lexus', country: 'اليابان', type: 'SUV' },
-            'JT8': { make: 'Lexus', country: 'اليابان', type: 'سيارة' },
-            'JTD': { make: 'Toyota', country: 'اليابان', type: 'سيارة' },
-            'JTE': { make: 'Toyota', country: 'اليابان', type: 'SUV' },
-            'JTH': { make: 'Lexus', country: 'اليابان', type: 'سيارة' },
-            'JTJ': { make: 'Lexus', country: 'اليابان', type: 'SUV' },
-            'JTK': { make: 'Toyota', country: 'اليابان', type: 'سيارة' },
-            'JTL': { make: 'Toyota', country: 'اليابان', type: 'شاحنة خفيفة' },
-            'JTM': { make: 'Toyota', country: 'اليابان', type: 'شاحنة' },
-            'JTN': { make: 'Toyota', country: 'اليابان', type: 'سيارة' },
-            
-            // Mazda
-            'JM1': { make: 'Mazda', country: 'اليابان', type: 'سيارة' },
-            'JM3': { make: 'Mazda', country: 'اليابان', type: 'SUV' },
-            'JM7': { make: 'Mazda', country: 'اليابان', type: 'شاحنة' },
-            
-            // Honda
-            'JHM': { make: 'Honda', country: 'اليابان', type: 'سيارة' },
-            'JHG': { make: 'Honda', country: 'اليابان', type: 'سيارة' },
-            'JHL': { make: 'Honda', country: 'اليابان', type: 'SUV' },
-            'JH2': { make: 'Honda', country: 'اليابان', type: 'دراجة نارية' },
-            'JH4': { make: 'Honda', country: 'اليابان', type: 'سيارة' },
-            
-            // Nissan
-            'JN1': { make: 'Nissan', country: 'اليابان', type: 'سيارة' },
-            'JN6': { make: 'Nissan', country: 'اليابان', type: 'شاحنة' },
-            'JNB': { make: 'Nissan', country: 'اليابان', type: 'سيارة' },
-            'JNC': { make: 'Nissan', country: 'اليابان', type: 'شاحنة' },
-            'JNK': { make: 'Nissan', country: 'اليابان', type: 'سيارة' },
-            'JNL': { make: 'Nissan', country: 'اليابان', type: 'SUV' },
-            'JNR': { make: 'Nissan', country: 'اليابان', type: 'سيارة' },
-            'JNT': { make: 'Nissan', country: 'اليابان', type: 'سيارة' },
-            'JNX': { make: 'Nissan', country: 'اليابان', type: 'SUV' },
-            'JNY': { make: 'Nissan', country: 'اليابان', type: 'شاحنة' },
-            'JNZ': { make: 'Nissan', country: 'اليابان', type: 'سيارة' },
-            
-            // Mitsubishi
-            'JA3': { make: 'Mitsubishi', country: 'اليابان', type: 'سيارة' },
-            'JA4': { make: 'Mitsubishi', country: 'اليابان', type: 'شاحنة' },
-            'JA7': { make: 'Mitsubishi', country: 'اليابان', type: 'SUV' },
-            'JLA': { make: 'Mitsubishi', country: 'اليابان', type: 'شاحنة' },
-            'JLB': { make: 'Mitsubishi', country: 'اليابان', type: 'حافلة' },
-            'JLF': { make: 'Mitsubishi', country: 'اليابان', type: 'شاحنة' },
-            'JMB': { make: 'Mitsubishi', country: 'اليابان', type: 'SUV' },
-            'JMF': { make: 'Mitsubishi', country: 'اليابان', type: 'سيارة' },
-            
-            // Isuzu
-            'JAA': { make: 'Isuzu', country: 'اليابان', type: 'شاحنة' },
-            'JAB': { make: 'Isuzu', country: 'اليابان', type: 'حافلة' },
-            'JAC': { make: 'Isuzu', country: 'اليابان', type: 'شاحنة' },
-            'JAL': { make: 'Isuzu', country: 'اليابان', type: 'شاحنة' },
-            'JAM': { make: 'Isuzu', country: 'اليابان', type: 'حافلة' },
-            'JAN': { make: 'Isuzu', country: 'اليابان', type: 'شاحنة' },
-            'JAR': { make: 'Isuzu', country: 'اليابان', type: 'شاحنة' },
-            'JAS': { make: 'Isuzu', country: 'اليابان', type: 'شاحنة' },
-            
-            // Hyundai & Kia (Korea)
-            'KMF': { make: 'Hyundai', country: 'كوريا الجنوبية', type: 'شاحنة' },
-            'KMH': { make: 'Hyundai', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KMJ': { make: 'Hyundai', country: 'كوريا الجنوبية', type: 'حافلة' },
-            'KMK': { make: 'Hyundai', country: 'كوريا الجنوبية', type: 'شاحنة' },
-            'KML': { make: 'Hyundai', country: 'كوريا الجنوبية', type: 'شاحنة' },
-            'KMM': { make: 'Hyundai', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KMN': { make: 'Hyundai', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KMP': { make: 'Hyundai', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KMR': { make: 'Hyundai', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KMX': { make: 'Hyundai', country: 'كوريا الجنوبية', type: 'SUV' },
-            'KNB': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KNC': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KND': { make: 'Kia', country: 'كوريا الجنوبية', type: 'SUV' },
-            'KNE': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KNF': { make: 'Kia', country: 'كوريا الجنوبية', type: 'شاحنة' },
-            'KNG': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KNH': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KNJ': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KNK': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KNM': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KNN': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KNP': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KNR': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KNS': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KNT': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            'KNU': { make: 'Kia', country: 'كوريا الجنوبية', type: 'سيارة' },
-            
-            // China Brands
-            'L6T': { make: 'Geely', country: 'الصين', type: 'سيارة' },
-            'L6V': { make: 'Geely', country: 'الصين', type: 'SUV' },
-            'L6W': { make: 'Geely', country: 'الصين', type: 'سيارة' },
-            'L6X': { make: 'Geely', country: 'الصين', type: 'سيارة' },
-            'L6Y': { make: 'Geely', country: 'الصين', type: 'سيارة' },
-            'L6Z': { make: 'Geely', country: 'الصين', type: 'سيارة' },
-            'LVF': { make: 'Chery', country: 'الصين', type: 'سيارة' },
-            'LVG': { make: 'GAC Toyota', country: 'الصين', type: 'سيارة' },
-            'LVH': { make: 'Chery', country: 'الصين', type: 'سيارة' },
-            'LVV': { make: 'Chery', country: 'الصين', type: 'سيارة' },
-            'LVR': { make: 'Changan Mazda', country: 'الصين', type: 'سيارة' },
-            'LVS': { make: 'Changan Ford', country: 'الصين', type: 'سيارة' },
-            'LVX': { make: 'Changan', country: 'الصين', type: 'سيارة' },
-            'LSG': { make: 'GM China', country: 'الصين', type: 'سيارة' },
-            'LSJ': { make: 'MG', country: 'الصين', type: 'سيارة' },
-            'LSY': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LS5': { make: 'Changan', country: 'الصين', type: 'سيارة' },
-            'LS6': { make: 'Changan', country: 'الصين', type: 'SUV' },
-            'LJU': { make: 'MG', country: 'الصين', type: 'سيارة' },
-            'LJW': { make: 'MG', country: 'الصين', type: 'سيارة' },
-            'LJY': { make: 'MG', country: 'الصين', type: 'سيارة' },
-            'LKE': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LKF': { make: 'GAC', country: 'الصين', type: 'SUV' },
-            'LKG': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LKH': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LKJ': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LKK': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LKL': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LKM': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LKN': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LKP': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LKR': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LKS': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LKT': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LKV': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            'LKY': { make: 'GAC', country: 'الصين', type: 'سيارة' },
-            
-            // USA Brands
-            '1F6': { make: 'Ford', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '1F7': { make: 'Ford', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '1FA': { make: 'Ford', country: 'الولايات المتحدة', type: 'سيارة' },
-            '1FB': { make: 'Ford', country: 'الولايات المتحدة', type: 'حافلة' },
-            '1FC': { make: 'Ford', country: 'الولايات المتحدة', type: 'حافلة' },
-            '1FD': { make: 'Ford', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '1FM': { make: 'Ford', country: 'الولايات المتحدة', type: 'SUV' },
-            '1FT': { make: 'Ford', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '1G1': { make: 'Chevrolet', country: 'الولايات المتحدة', type: 'سيارة' },
-            '1G3': { make: 'Oldsmobile', country: 'الولايات المتحدة', type: 'سيارة' },
-            '1G4': { make: 'Buick', country: 'الولايات المتحدة', type: 'سيارة' },
-            '1G6': { make: 'Cadillac', country: 'الولايات المتحدة', type: 'سيارة' },
-            '1GC': { make: 'Chevrolet', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '1GD': { make: 'GMC', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '1GE': { make: 'Cadillac', country: 'الولايات المتحدة', type: 'SUV' },
-            '1GN': { make: 'Chevrolet', country: 'الولايات المتحدة', type: 'SUV' },
-            '1GT': { make: 'GMC', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '1GY': { make: 'Cadillac', country: 'الولايات المتحدة', type: 'SUV' },
-            '1HG': { make: 'Honda USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            '1ME': { make: 'Mercury', country: 'الولايات المتحدة', type: 'سيارة' },
-            '1N4': { make: 'Nissan USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            '1N6': { make: 'Nissan USA', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '1NX': { make: 'Toyota USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            '1VW': { make: 'Volkswagen USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            '1YV': { make: 'Mazda USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            '1ZV': { make: 'Ford', country: 'الولايات المتحدة', type: 'سيارة' },
-            '1ZW': { make: 'Mercury', country: 'الولايات المتحدة', type: 'سيارة' },
-            '4F2': { make: 'Mazda USA', country: 'الولايات المتحدة', type: 'SUV' },
-            '4F4': { make: 'Mazda USA', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '4M2': { make: 'Mercury', country: 'الولايات المتحدة', type: 'SUV' },
-            '4N2': { make: 'Nissan USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            '4S6': { make: 'Honda USA', country: 'الولايات المتحدة', type: 'SUV' },
-            '4T1': { make: 'Toyota USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            '4T3': { make: 'Toyota USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            '4T4': { make: 'Toyota USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            '4TA': { make: 'Toyota USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            '4TB': { make: 'Toyota USA', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '5FN': { make: 'Honda USA', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '5FP': { make: 'Honda USA', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '5FR': { make: 'Honda USA', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '5J6': { make: 'Honda USA', country: 'الولايات المتحدة', type: 'SUV' },
-            '5N1': { make: 'Hyundai USA', country: 'الولايات المتحدة', type: 'SUV' },
-            '5N3': { make: 'Hyundai USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            '5NM': { make: 'Hyundai USA', country: 'الولايات المتحدة', type: 'SUV' },
-            '5NP': { make: 'Hyundai USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            '5T4': { make: 'Toyota USA', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '5TB': { make: 'Toyota USA', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '5TD': { make: 'Toyota USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            '5TE': { make: 'Toyota USA', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '5TF': { make: 'Toyota USA', country: 'الولايات المتحدة', type: 'شاحنة' },
-            '5YF': { make: 'Toyota USA', country: 'الولايات المتحدة', type: 'سيارة' },
-            
-            // Canada
-            '2F4': { make: 'Ford Canada', country: 'كندا', type: 'شاحنة' },
-            '2FM': { make: 'Ford Canada', country: 'كندا', type: 'SUV' },
-            '2FT': { make: 'Ford Canada', country: 'كندا', type: 'شاحنة' },
-            '2G1': { make: 'Chevrolet Canada', country: 'كندا', type: 'سيارة' },
-            '2G2': { make: 'Pontiac Canada', country: 'كندا', type: 'سيارة' },
-            '2G4': { make: 'Buick Canada', country: 'كندا', type: 'سيارة' },
-            '2HG': { make: 'Honda Canada', country: 'كندا', type: 'سيارة' },
-            '2HJ': { make: 'Honda Canada', country: 'كندا', type: 'سيارة' },
-            '2HK': { make: 'Honda Canada', country: 'كندا', type: 'SUV' },
-            '2HM': { make: 'Hyundai Canada', country: 'كندا', type: 'سيارة' },
-            '2T1': { make: 'Toyota Canada', country: 'كندا', type: 'سيارة' },
-            '2T3': { make: 'Toyota Canada', country: 'كندا', type: 'سيارة' },
-            '2T4': { make: 'Toyota Canada', country: 'كندا', type: 'سيارة' },
-            
-            // Mexico
-            '3FA': { make: 'Ford Mexico', country: 'المكسيك', type: 'سيارة' },
-            '3FE': { make: 'Ford Mexico', country: 'المكسيك', type: 'شاحنة' },
-            '3G0': { make: 'GM Mexico', country: 'المكسيك', type: 'سيارة' },
-            '3G1': { make: 'Chevrolet Mexico', country: 'المكسيك', type: 'سيارة' },
-            '3G4': { make: 'Buick Mexico', country: 'المكسيك', type: 'سيارة' },
-            '3G5': { make: 'GMC Mexico', country: 'المكسيك', type: 'شاحنة' },
-            '3G7': { make: 'GMC Mexico', country: 'المكسيك', type: 'شاحنة' },
-            '3GC': { make: 'Chevrolet Mexico', country: 'المكسيك', type: 'شاحنة' },
-            '3GN': { make: 'Chevrolet Mexico', country: 'المكسيك', type: 'SUV' },
-            '3GT': { make: 'GMC Mexico', country: 'المكسيك', type: 'شاحنة' },
-            '3GY': { make: 'GMC Mexico', country: 'المكسيك', type: 'SUV' },
-            '3HG': { make: 'Honda Mexico', country: 'المكسيك', type: 'سيارة' },
-            '3HM': { make: 'Honda Mexico', country: 'المكسيك', type: 'سيارة' },
-            '3N1': { make: 'Nissan Mexico', country: 'المكسيك', type: 'سيارة' },
-            '3N6': { make: 'Nissan Mexico', country: 'المكسيك', type: 'شاحنة' },
-            '3T3': { make: 'Toyota Mexico', country: 'المكسيك', type: 'سيارة' },
-            '3VW': { make: 'Volkswagen Mexico', country: 'المكسيك', type: 'سيارة' },
-            
-            // Volvo (Sweden)
-            'YV1': { make: 'Volvo', country: 'السويد', type: 'سيارة' },
-            'YV2': { make: 'Volvo', country: 'السويد', type: 'شاحنة' },
-            'YV3': { make: 'Volvo', country: 'السويد', type: 'حافلة' },
-            'YV4': { make: 'Volvo', country: 'السويد', type: 'SUV' },
-            'YV5': { make: 'Volvo', country: 'السويد', type: 'سيارة' }
-        };
 
-        // Year codes for VIN position 10
-        const yearCodes = {
-            'A': 2010, 'B': 2011, 'C': 2012, 'D': 2013, 'E': 2014, 'F': 2015,
-            'G': 2016, 'H': 2017, 'J': 2018, 'K': 2019, 'L': 2020, 'M': 2021,
-            'N': 2022, 'P': 2023, 'R': 2024, 'S': 2025, 'T': 2026, 'V': 2027,
-            'W': 2028, 'X': 2029, 'Y': 2030, '1': 2001, '2': 2002, '3': 2003,
-            '4': 2004, '5': 2005, '6': 2006, '7': 2007, '8': 2008, '9': 2009
-        };
-
-        // Brand Models Database
-        const brandModels = {
-            'Toyota': ['Camry - كامري', 'Corolla - كورولا', 'Land Cruiser - لاند كروزر', 'Hilux - هايلكس', 'RAV4 - راف فور', 'Prado - برادو', 'Fortuner - فورتشنر', 'Yaris - يارس', 'Avalon - أفالون', 'Highlander - هايلاندر', 'Sequoia - سيكويا', 'Tacoma - تاكوما', 'Tundra - تندرا', 'Sienna - سيينا', 'C-HR - سي إتش آر', 'Prius - بريوس'],
-            'Lexus': ['ES - إي إس', 'LS - إل إس', 'RX - آر إكس', 'NX - إن إكس', 'UX - يو إكس', 'GX - جي إكس', 'LX - إل إكس', 'IS - أي إس', 'RC - آر سي', 'LC - إل سي', 'LM - إل إم'],
-            'Kia': ['Sorento - سورينتو', 'Sportage - سبورتاج', 'Optima - أوبتيما', 'K5 - كي 5', 'K3 - كي 3', 'Cerato - سيراتو', 'Rio - ريو', 'Picanto - بيكانتو', 'Carnival - كرنفال', 'Telluride - تيلورايد', 'Seltos - سيلتوس', 'Sonet - سونيت', 'Stinger - ستينجر'],
-            'Hyundai': ['Elantra - إلنترا', 'Sonata - سوناتا', 'Tucson - توسان', 'Santa Fe - سانتافي', 'Accent - أكسنت', 'Creta - كريتا', 'Kona - كونا', 'Palisade - باليساد', 'Venue - فينيو', 'Azera - أزيرا', 'Genesis - جينيسيس', 'Staria - ستاريا'],
-            'Nissan': ['Altima - ألتيما', 'Maxima - ماكسيما', 'Patrol - باترول', 'X-Trail - إكستريل', 'Pathfinder - باثفايندر', 'Armada - أرمادا', 'Murano - مورانو', 'Rogue - روغ', 'Sentra - سنترا', 'Sunny - صني', 'Navara - نافارا', 'Titan - تايتن', 'Frontier - فرونتير', 'Z - زد', 'GT-R - جي تي آر'],
-            'Mazda': ['Mazda3 - مازدا 3', 'Mazda6 - مازدا 6', 'CX-5 - سي إكس 5', 'CX-9 - سي إكس 9', 'CX-30 - سي إكس 30', 'CX-50 - سي إكس 50', 'MX-5 - إم إكس 5', 'BT-50 - بي تي 50'],
-            'Chery': ['Tiggo 2 - تيجو 2', 'Tiggo 3 - تيجو 3', 'Tiggo 4 - تيجو 4', 'Tiggo 7 - تيجو 7', 'Tiggo 8 - تيجو 8', 'Arrizo 5 - أريزو 5', 'Arrizo 6 - أريزو 6', 'Omoda 5 - أومودا 5'],
-            'Geely': ['Emgrand - إمجراند', 'Coolray - كول راي', 'Azkarra - أزكارا', 'Tugella - توجيلا', 'Monjaro - مونجارو', 'Geometry - جيومتري', 'Preface - بريفيس', 'Atlas - أطلس'],
-            'GAC': ['GS3 - جي إس 3', 'GS4 - جي إس 4', 'GS5 - جي إس 5', 'GS8 - جي إس 8', 'GA4 - جي أي 4', 'GA6 - جي أي 6', 'GA8 - جي أي 8', 'GN8 - جي إن 8', 'M8 - إم 8'],
-            'MG': ['5 - إم جي 5', '6 - إم جي 6', 'ZS - زد إس', 'HS - إتش إس', 'RX5 - آر إكس 5', 'RX8 - آر إكس 8', 'GT - جي تي', 'Cyberster - سايبرستر'],
-            'Changan': ['Alsvin - ألسفين', 'Eado - إيدو', 'CS35 - سي إس 35', 'CS55 - سي إس 55', 'CS75 - سي إس 75', 'CS95 - سي إس 95', 'UNI-K - يوني كي', 'UNI-T - يوني تي', 'Oshan - أوشان'],
-            'Ford': ['Mustang - موستانج', 'Explorer - إكسبلورر', 'Expedition - إكسبدشن', 'F-150 - إف 150', 'Ranger - رينجر', 'Bronco - برونكو', 'Edge - إيدج', 'Escape - إسكيب', 'Focus - فوكس', 'Fusion - فيوجن', 'Taurus - تورس'],
-            'Chevrolet': ['Malibu - ماليبو', 'Impala - إمبالا', 'Camaro - كمارو', 'Corvette - كورفيت', 'Tahoe - تاهو', 'Suburban - سوبربان', 'Traverse - ترافيرس', 'Equinox - إكوينوكس', 'Blazer - بليزر', 'Trailblazer - تريل بليزر', 'Silverado - سيلفرادو', 'Colorado - كولورادو'],
-            'GMC': ['Sierra - سييرا', 'Canyon - كانيون', 'Yukon - يوكون', 'Acadia - أكاديا', 'Terrain - تيرين', 'Savana - سافانا', 'Hummer EV - همر'],
-            'Mercury': ['Grand Marquis - جراند ماركيز', 'Milan - ميلان', 'Mountaineer - ماونتنير', 'Mariner - مارينر', 'Sable - سابل'],
-            'GM': ['Buick - بويك', 'Cadillac - كاديلاك', 'GMC - جي إم سي', 'Chevrolet - شيفروليه'],
-            'Isuzu': ['D-Max - دي ماكس', 'MU-X - إم يو إكس', 'NPR - إن بي آر', 'NQR - إن كيو آر', 'FVR - إف في آر', 'Giga - جيجا'],
-            'Honda': ['Accord - أكورد', 'Civic - سيفيك', 'City - سيتي', 'CR-V - سي آر في', 'Pilot - بايلوت', 'Passport - باسبورت', 'Odyssey - أوديسي', 'Ridgeline - ريدج لاين', 'HR-V - إتش آر في', 'Insight - إنسايت'],
-            'Mitsubishi': ['Lancer - لانسر', 'Pajero - باجيرو', 'Montero - مونتيرو', 'Outlander - أوتلاندر', 'Eclipse Cross - إكليبس كروس', 'ASX - أي إس إكس', 'Attrage - أتراج', 'Mirage - ميراج', 'L200 - إل 200', 'Triton - ترايتون'],
-            'Volvo': ['S60 - إس 60', 'S90 - إس 90', 'V60 - في 60', 'V90 - في 90', 'XC40 - إكس سي 40', 'XC60 - إكس سي 60', 'XC90 - إكس سي 90', 'C40 - سي 40', 'EX90 - إي إكس 90']
-        };
-
-        // Sample Parts with Images
+        const wmiDatabase = {'JT3':{make:'Toyota',country:'اليابان'},'JT8':{make:'Lexus',country:'اليابان'},'JTD':{make:'Toyota',country:'اليابان'},'KMH':{make:'Hyundai',country:'كوريا'},'KND':{make:'Kia',country:'كوريا'},'JN1':{make:'Nissan',country:'اليابان'},'JM1':{make:'Mazda',country:'اليابان'},'JHM':{make:'Honda',country:'اليابان'},'JA3':{make:'Mitsubishi',country:'اليابان'},'1G1':{make:'Chevrolet',country:'الولايات المتحدة'},'1FA':{make:'Ford',country:'الولايات المتحدة'}};
+        const yearCodes = {'A':2010,'B':2011,'C':2012,'D':2013,'E':2014,'F':2015,'G':2016,'H':2017,'J':2018,'K':2019,'L':2020,'M':2021,'N':2022,'P':2023,'R':2024,'S':2025};
+        const brandModels = {'Toyota':['Camry','Corolla','Land Cruiser'],'Lexus':['ES','RX','LX'],'Hyundai':['Elantra','Sonata','Tucson'],'Kia':['Sportage','Sorento','K5'],'Nissan':['Altima','Patrol','X-Trail'],'Honda':['Accord','Civic','CR-V']};
         const sampleParts = [
-            { id: 1, name: 'فلتر زيت أصلي تويوتا', price: 85, code: '90919-YZZE1', image: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&auto=format&fit=crop&q=80', availability: 'متوفر', location: 'الرياض', brand: 'Toyota' },
-            { id: 2, name: 'فرامل أمامية (طقم كامل)', price: 320, code: '04465-35290', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&auto=format&fit=crop&q=80', availability: 'متوفر', location: 'جدة', brand: 'Toyota' },
-            { id: 3, name: 'شمعات إشعال (4 قطع)', price: 145, code: '90919-02244', image: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400&auto=format&fit=crop&q=80', availability: 'متوفر', location: 'الدمام', brand: 'Toyota' },
-            { id: 4, name: 'فلتر هواء رياضي', price: 65, code: '17801-0L040', image: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=400&auto=format&fit=crop&q=80', availability: 'نفذت الكمية', location: 'الرياض', brand: 'Toyota' },
-            { id: 5, name: 'تيل فرامل خلفي سيراميك', price: 180, code: '04466-60140', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&auto=format&fit=crop&q=80', availability: 'متوفر', location: 'مكة', brand: 'Toyota' },
-            { id: 6, name: 'بطارية 12V 70Ah', price: 450, code: '28800-YZZAB', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&auto=format&fit=crop&q=80', availability: 'متوفر', location: 'الرياض', brand: 'Toyota' }
+            { id:1, name:'فلتر زيت أصلي تويوتا', price:85, code:'90919-YZZE1', image:'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=200&h=200&fit=crop', availability:'متوفر', location:'الرياض' },
+            { id:2, name:'فرامل أمامية (طقم كامل)', price:320, code:'04465-35290', image:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop', availability:'متوفر', location:'جدة' },
+            { id:3, name:'شمعات إشعال (4 قطع)', price:145, code:'90919-02244', image:'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=200&h=200&fit=crop', availability:'متوفر', location:'الدمام' },
+            { id:4, name:'فلتر هواء رياضي', price:65, code:'17801-0L040', image:'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=200&h=200&fit=crop', availability:'نفذت الكمية', location:'الرياض' },
+            { id:5, name:'تيل فرامل خلفي سيراميك', price:180, code:'04466-60140', image:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop', availability:'متوفر', location:'مكة' },
+            { id:6, name:'بطارية 12V 70Ah', price:450, code:'28800-YZZAB', image:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop', availability:'متوفر', location:'الرياض' }
         ];
 
-        // Cart State
-        let cart = [];
-        let selectedCategory = null;
-        let currentVINData = null;
+        let cart = [], selectedCategory = null, currentVINData = null;
 
-        // Navigation
+        function renderProducts(containerId, products) {
+            const container = document.getElementById(containerId);
+            if(!container) return;
+            container.innerHTML = products.map(p => `
+                <div class="product-card">
+                    <img src="${p.image}" class="product-image" alt="${p.name}">
+                    <div class="product-details">
+                        <div class="product-title">${p.name}</div>
+                        <div class="product-code">${p.code}</div>
+                        <div class="product-price">${p.price} ر.س</div>
+                        <div class="product-location">📍 ${p.location} | ${p.availability}</div>
+                        <button class="add-to-cart-btn" onclick="addToCart(${p.id})">➕ أضف للسلة</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
         function showHome() {
-            document.querySelectorAll('.search-form, .results-section, .loading').forEach(el => {
-                el.classList.remove('active');
-            });
+            document.querySelectorAll('.search-form, .results-section, .loading').forEach(el => el.classList.remove('active'));
             document.getElementById('homePage').style.display = 'block';
-            updateNavActive(0);
+            renderProducts('featuredProducts', sampleParts.slice(0,4));
+            document.querySelectorAll('.nav-item').forEach((item,i)=>item.classList.toggle('active',i===0));
+            // Clear home search results when returning to home
+            document.getElementById('homeSearchResults').innerHTML = '';
         }
 
         function showSearch(type) {
             document.getElementById('homePage').style.display = 'none';
-            document.querySelectorAll('.search-form, .results-section, .loading').forEach(el => {
-                el.classList.remove('active');
-            });
-            
-            const formMap = {
-                'vin': 'vinSearch',
-                'make': 'makeSearch',
-                'part': 'partSearch',
-                'category': 'categorySearch'
-            };
-            
-            document.getElementById(formMap[type]).classList.add('active');
-            
-            // Update active nav based on type
-            if (type === 'vin') updateNavActive(1);
-            else if (type === 'category') updateNavActive(2);
-            else updateNavActive(0);
+            document.querySelectorAll('.search-form, .results-section, .loading').forEach(el => el.classList.remove('active'));
+            const forms = { vin:'vinSearch', make:'makeSearch', part:'partSearch', category:'categorySearch' };
+            document.getElementById(forms[type]).classList.add('active');
         }
 
-        function updateNavActive(index) {
-            document.querySelectorAll('.nav-item').forEach((item, i) => {
-                item.classList.toggle('active', i === index);
-            });
-        }
-
-        // VIN Decoding
         function decodeVIN(vin) {
-            vin = vin.toUpperCase().replace(/[^A-HJ-NPR-Z0-9]/g, '');
-            document.getElementById('vinInput').value = vin;
-            
-            const vinInfo = document.getElementById('vinInfo');
-            const searchBtn = document.getElementById('vinSearchBtn');
-            
-            if (vin.length >= 3) {
-                const wmi = vin.substring(0, 3);
-                const data = wmiDatabase[wmi];
-                
-                if (data) {
-                    document.getElementById('vinMake').textContent = data.make;
-                    document.getElementById('vinCountry').textContent = data.country;
-                    document.getElementById('vinType').textContent = data.type;
-                    
-                    // Get year from position 10
-                    const yearCode = vin[9];
-                    const year = yearCodes[yearCode] || '-';
-                    document.getElementById('vinYear').textContent = year;
-                    
-                    vinInfo.classList.add('active');
-                    searchBtn.disabled = false;
-                    currentVINData = { ...data, year, vin };
-                } else {
-                    vinInfo.classList.remove('active');
-                    searchBtn.disabled = true;
-                    currentVINData = null;
-                }
-            } else {
-                vinInfo.classList.remove('active');
-                searchBtn.disabled = true;
-                currentVINData = null;
-            }
+            vin = vin.toUpperCase().slice(0,17);
+            const info = document.getElementById('vinInfo');
+            const wmi = vin.substring(0,3);
+            const data = wmiDatabase[wmi];
+            if(data && vin.length>=3) {
+                document.getElementById('vinMake').textContent = data.make;
+                document.getElementById('vinCountry').textContent = data.country;
+                document.getElementById('vinYear').textContent = yearCodes[vin[9]] || '-';
+                document.getElementById('vinType').textContent = 'سيارة';
+                info.classList.add('active');
+                currentVINData = data;
+                document.getElementById('vinSearchBtn').disabled = false;
+            } else { info.classList.remove('active'); currentVINData = null; }
         }
 
-        function searchByVIN() {
-            if (!currentVINData) {
-                alert('الرجاء إدخال رقم هيكل صحيح');
-                return;
-            }
-            performSearch();
-        }
-
-        // Make/Model Logic
         function updateModels() {
             const make = document.getElementById('makeSelect').value;
             const modelSelect = document.getElementById('modelSelect');
-            
             modelSelect.innerHTML = '<option value="">اختر الموديل</option>';
-            
-            if (make && brandModels[make]) {
-                brandModels[make].forEach(model => {
-                    const option = document.createElement('option');
-                    option.value = model;
-                    option.textContent = model;
-                    modelSelect.appendChild(option);
-                });
-                modelSelect.disabled = false;
-            } else {
-                modelSelect.disabled = true;
-            }
+            if(brandModels[make]) brandModels[make].forEach(m=>{ modelSelect.innerHTML+=`<option value="${m}">${m}</option>`; });
+            modelSelect.disabled = !brandModels[make];
         }
 
-        function searchByMake() {
-            const make = document.getElementById('makeSelect').value;
-            const model = document.getElementById('modelSelect').value;
-            const year = document.getElementById('yearSelect').value;
-            
-            if (!make || !model || !year) {
-                alert('الرجاء اختيار الشركة والموديل والسنة');
-                return;
-            }
-            performSearch();
-        }
+        function searchByVIN() { if(currentVINData) performSearch(); else alert('أدخل رقم هيكل صحيح'); }
+        function searchByMake() { performSearch(); }
+        function searchByPart() { performSearch(); }
+        function searchByCategory() { if(selectedCategory) performSearch(); else alert('اختر فئة'); }
+        function selectCategory(el, cat) { document.querySelectorAll('.category-item').forEach(c=>c.classList.remove('active')); el.classList.add('active'); selectedCategory=cat; }
 
-        // Part Number Search
-        function searchByPart() {
-            const part = document.getElementById('partInput').value;
-            if (!part) {
-                alert('الرجاء إدخال رقم القطعة');
-                return;
-            }
-            performSearch();
-        }
-
-        // Category Search
-        function selectCategory(element, category) {
-            document.querySelectorAll('.category-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            element.classList.add('active');
-            selectedCategory = category;
-        }
-
-        function searchByCategory() {
-            if (!selectedCategory) {
-                alert('الرجاء اختيار فئة القطع');
-                return;
-            }
-            performSearch();
-        }
-
-        // Perform Search
         function performSearch() {
-            document.querySelectorAll('.search-form').forEach(el => {
-                el.classList.remove('active');
-            });
+            document.querySelectorAll('.search-form').forEach(el=>el.classList.remove('active'));
             document.getElementById('loading').classList.add('active');
-
-            setTimeout(() => {
+            setTimeout(()=>{
                 document.getElementById('loading').classList.remove('active');
-                showResults();
-            }, 1500);
-        }
-
-        function showResults() {
-            const resultsDiv = document.getElementById('results');
-            const resultsList = document.getElementById('resultsList');
-            
-            document.getElementById('resultsNumber').textContent = sampleParts.length;
-            
-            resultsList.innerHTML = sampleParts.map(part => `
-                <div class="part-card">
-                    <img src="${part.image}" alt="${part.name}" class="part-image">
-                    <div class="part-content">
-                        <div class="part-header">
-                            <h3 class="part-title">${part.name}</h3>
-                            <span class="part-price">${part.price} ر.س</span>
-                        </div>
-                        <span class="part-code">${part.code}</span>
-                        <p class="part-details">
-                            متوفر في: ${part.location} | الحالة: ${part.availability}
-                        </p>
-                        <div class="part-actions">
-                            <button class="add-cart-btn" onclick="addToCart(${part.id})">
-                                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                                أضف للسلة
-                            </button>
-                            <button class="wishlist-btn">
-                                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                            </button>
+                const searchResultsHTML = sampleParts.map(p => `
+                    <div class="product-card">
+                        <img src="${p.image}" class="product-image">
+                        <div class="product-details">
+                            <div class="product-title">${p.name}</div>
+                            <div class="product-code">${p.code}</div>
+                            <div class="product-price">${p.price} ر.س</div>
+                            <div class="product-location">📍 ${p.location}</div>
+                            <button class="add-to-cart-btn" onclick="addToCart(${p.id})">➕ أضف للسلة</button>
                         </div>
                     </div>
-                </div>
-            `).join('');
-            
-            resultsDiv.classList.add('active');
+                `).join('');
+                document.getElementById('homeSearchResults').innerHTML = `<div style="margin-bottom:8px; font-weight:700; padding:0 4px;">نتائج البحث (${sampleParts.length})</div>${searchResultsHTML}`;
+                document.getElementById('resultsNumber').textContent = sampleParts.length;
+                document.getElementById('resultsList').innerHTML = searchResultsHTML;
+                document.getElementById('homeSearchResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 800);
         }
 
-        // Cart Functions
-        function addToCart(partId) {
-            const part = sampleParts.find(p => p.id === partId);
-            if (!part) return;
-            
-            const existingItem = cart.find(item => item.id === partId);
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                cart.push({ ...part, quantity: 1 });
-            }
-            
+        function globalSearch() {
+            performSearch();
+        }
+
+        function addToCart(id) {
+            const part = sampleParts.find(p=>p.id===id);
+            const existing = cart.find(i=>i.id===id);
+            if(existing) existing.quantity++;
+            else cart.push({...part, quantity:1});
             updateCartUI();
             openCart();
         }
 
-        function removeFromCart(partId) {
-            cart = cart.filter(item => item.id !== partId);
-            updateCartUI();
-        }
-
-        function updateQuantity(partId, change) {
-            const item = cart.find(item => item.id === partId);
-            if (!item) return;
-            
-            item.quantity += change;
-            if (item.quantity <= 0) {
-                removeFromCart(partId);
-            } else {
-                updateCartUI();
-            }
-        }
-
         function updateCartUI() {
-            const cartCount = document.getElementById('cartCount');
-            const cartItems = document.getElementById('cartItems');
-            const cartFooter = document.getElementById('cartFooter');
-            const cartTotal = document.getElementById('cartTotal');
-            
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            
-            if (totalItems > 0) {
-                cartCount.textContent = totalItems;
-                cartCount.style.display = 'flex';
-                cartFooter.style.display = 'block';
-                cartTotal.textContent = totalPrice + ' ر.س';
-                
-                cartItems.innerHTML = cart.map(item => `
-                    <div class="cart-item">
-                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-                        <div class="cart-item-details">
-                            <div class="cart-item-title">${item.name}</div>
-                            <div class="cart-item-price">${item.price} ر.س</div>
-                            <div class="cart-item-actions">
-                                <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
-                                <span class="qty-text">${item.quantity}</span>
-                                <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
-                                <span class="remove-item" onclick="removeFromCart(${item.id})">حذف</span>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            } else {
-                cartCount.style.display = 'none';
-                cartFooter.style.display = 'none';
-                cartItems.innerHTML = `
-                    <div class="cart-empty">
-                        <div class="cart-empty-icon">🛒</div>
-                        <p>السلة فارغة</p>
-                    </div>
-                `;
-            }
+            const total = cart.reduce((s,i)=>s+(i.price*i.quantity),0);
+            const count = cart.reduce((s,i)=>s+i.quantity,0);
+            document.getElementById('cartCount').style.display = count?'flex':'none';
+            document.getElementById('cartCount').textContent = count;
+            document.getElementById('cartTotal').textContent = total+' ر.س';
+            document.getElementById('cartFooter').style.display = count?'block':'none';
+            document.getElementById('cartItems').innerHTML = cart.length?cart.map(i=>`
+                <div class="cart-item">
+                    <img src="${i.image}" class="cart-item-image">
+                    <div><div>${i.name}</div><div>${i.price} ر.س × ${i.quantity}</div></div>
+                    <button onclick="removeFromCart(${i.id})" style="margin-right:auto;background:none;border:none;color:red;">حذف</button>
+                </div>
+            `).join(''):'<div class="cart-empty" style="text-align:center;padding:40px">السلة فارغة</div>';
         }
 
-        function openCart() {
-            document.getElementById('cartModal').classList.add('active');
-        }
+        function removeFromCart(id) { cart = cart.filter(i=>i.id!==id); updateCartUI(); }
+        function openCart() { document.getElementById('cartModal').classList.add('active'); }
+        function closeCart(e) { if(!e||e.target===document.getElementById('cartModal')) document.getElementById('cartModal').classList.remove('active'); }
+        function openAuth() { document.getElementById('authModal').classList.add('active'); }
+        function closeAuth(e) { if(!e||e.target===document.getElementById('authModal')) document.getElementById('authModal').classList.remove('active'); }
+        function switchTab(tab) { document.getElementById('loginForm').style.display = tab==='login'?'block':'none'; document.getElementById('registerForm').style.display = tab==='register'?'block':'none'; document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active')); event.target.classList.add('active'); }
+        function toggleTheme() { document.body.classList.toggle('dark-theme'); }
 
-        function closeCart(e) {
-            if (!e || e.target === document.getElementById('cartModal')) {
-                document.getElementById('cartModal').classList.remove('active');
-            }
-        }
-
-        // Auth Functions
-        function openAuth() {
-            document.getElementById('authModal').classList.add('active');
-        }
-
-        function closeAuth(e) {
-            if (!e || e.target === document.getElementById('authModal')) {
-                document.getElementById('authModal').classList.remove('active');
-            }
-        }
-
-        function switchTab(tab) {
-            const target = event.target;
-            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-            target.classList.add('active');
-            
-            if (tab === 'login') {
-                document.getElementById('loginForm').style.display = 'block';
-                document.getElementById('registerForm').style.display = 'none';
-            } else {
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('registerForm').style.display = 'block';
-            }
-        }
-
-        // Initialize
         showHome();
     </script>
 </body>
